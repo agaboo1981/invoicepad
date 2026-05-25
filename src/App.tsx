@@ -199,6 +199,12 @@ export default function App() {
               <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/freelancer-invoice-generator.html">Invoice Generator for Freelancers</a>
               <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/consultant-invoice-template.html">Consultant Invoice Template</a>
               <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-india.html">Invoice Generator India</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-usa.html">Invoice Generator USA</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-uk.html">Invoice Generator UK</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-canada.html">Invoice Generator Canada</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/self-employed-invoice-template.html">Self-Employed Invoice Template</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/hourly-invoice-template.html">Hourly Invoice Template</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/contractor-invoice-generator.html">Contractor Invoice Generator</a>
               <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-template-guide.html">Invoice Template Guide</a>
             </nav>
           </div>

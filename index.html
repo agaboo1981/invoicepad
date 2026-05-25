@@ -3,45 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InvoicePad | Free Online Invoice Maker & Generator</title>
-    <meta name="description" content="Create professional, print-ready invoices instantly with InvoicePad. A 100% free, client-side, online invoice maker and generator. No sign-ups required. Download your PDF instantly." />
-    <meta name="keywords" content="invoice generator, free invoice maker, online invoice generator, pdf invoice maker, create invoice online, simple invoice generator, invoice maker app, freelance invoice" />
+    <title>Free Invoice Generator & Invoice Maker Online | InvoicePad</title>
+    <meta name="description" content="Create professional invoices online for free with InvoicePad. Add line items, taxes, discounts, logos and QR payments, then download print-ready PDF invoices instantly." />
+    <meta name="keywords" content="free invoice generator, invoice maker online, invoice generator online, pdf invoice generator, professional invoice template, freelance invoice maker, small business invoicing, printable invoice" />
     <meta name="author" content="InvoicePad" />
-    <meta name="robots" content="index, follow" />
+    <meta name="application-name" content="InvoicePad" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://invoicepad.shop/" />
+    <link rel="alternate" hreflang="en" href="https://invoicepad.shop/" />
+    <link rel="alternate" hreflang="x-default" href="https://invoicepad.shop/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://invoicepad.shop/" />
-    <meta property="og:title" content="InvoicePad | Free Online Invoice Maker & Generator" />
-    <meta property="og:description" content="Generate professional invoices directly in your browser. Download as PDF instantly. No sign-ups, 100% privacy." />
+    <meta property="og:site_name" content="InvoicePad" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
+    <meta property="og:description" content="Build professional invoices in your browser, calculate taxes and discounts, add logos or QR payments, and export polished PDFs in seconds." />
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://invoicepad.shop/" />
-    <meta property="twitter:title" content="InvoicePad | Free Online Invoice Maker" />
-    <meta property="twitter:description" content="Generate professional invoices directly in your browser. Download as PDF instantly. No sign-ups." />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:url" content="https://invoicepad.shop/" />
+    <meta name="twitter:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
+    <meta name="twitter:description" content="Create free, print-ready invoices online with taxes, discounts, logos, QR payments and instant PDF export." />
 
     <!-- Structured Data (JSON-LD) for SEO -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "InvoicePad",
-      "url": "https://invoicepad.shop/",
-      "description": "A high-performance, strictly utilitarian invoice generator. Fully client-side, zero sign-ups, optimized for PDF export and professional usage.",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "100% Client-Side Processing",
-        "Export to PDF",
-        "Multi-currency support",
-        "Tax and Discount Calculations",
-        "Scan-to-pay QR Codes"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://invoicepad.shop/#organization",
+          "name": "InvoicePad",
+          "url": "https://invoicepad.shop/"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://invoicepad.shop/#website",
+          "url": "https://invoicepad.shop/",
+          "name": "InvoicePad",
+          "description": "Free online invoice generator for freelancers, contractors and small businesses.",
+          "inLanguage": "en",
+          "publisher": {
+            "@id": "https://invoicepad.shop/#organization"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://invoicepad.shop/#app",
+          "name": "InvoicePad",
+          "url": "https://invoicepad.shop/",
+          "applicationCategory": "BusinessApplication",
+          "applicationSubCategory": "Invoice Generator",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript and a modern web browser.",
+          "description": "Create professional invoices online for free, customize tax and discount fields, add logos and payment QR codes, and export invoices as print-ready PDFs.",
+          "isAccessibleForFree": true,
+          "inLanguage": "en",
+          "publisher": {
+            "@id": "https://invoicepad.shop/#organization"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Free online invoice generator",
+            "Instant PDF invoice download",
+            "Client-side invoice editing",
+            "Tax and discount calculations",
+            "Logo upload support",
+            "Payment QR code support",
+            "Multi-currency invoicing"
+          ]
+        }
       ]
     }
     </script>
@@ -50,8 +89,11 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8597685788577214" crossorigin="anonymous"></script>
   </head>
   <body>
+    <noscript>
+      <h1>Free Invoice Generator Online</h1>
+      <p>InvoicePad helps freelancers, contractors and small businesses create professional invoices online and export them as print-ready PDF files. Enable JavaScript to use the invoice editor.</p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

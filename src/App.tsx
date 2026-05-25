@@ -131,12 +131,21 @@ export default function App() {
                 >
                   <Eye size={14} /> {t('preview')}
                 </button>
-                <button 
-                  onClick={handleReset}
-                  className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
-                >
-                  <RotateCcw size={14} /> {t('resetAll')}
-                </button>
+                {showResetConfirm ? (
+                  <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded border border-red-100 dark:border-red-900/30">
+                    <span className="text-[10px] sm:text-xs text-red-600 dark:text-red-400 font-bold uppercase tracking-wider">Sure?</span>
+                    <button onClick={confirmReset} className="text-[10px] sm:text-xs text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 font-bold uppercase tracking-wider transition-colors">Yes</button>
+                    <span className="text-red-300 dark:text-red-800/50">|</span>
+                    <button onClick={() => setShowResetConfirm(false)} className="text-[10px] sm:text-xs text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white font-bold uppercase tracking-wider transition-colors">No</button>
+                  </div>
+                ) : (
+                  <button 
+                    onClick={handleReset}
+                    className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
+                  >
+                    <RotateCcw size={14} /> {t('resetAll')}
+                  </button>
+                )}
               </div>
             </div>
             <InvoiceForm data={data} onChange={setData} />
@@ -221,32 +230,6 @@ export default function App() {
              <div className="border border-gray-300 dark:border-zinc-700 relative shadow-sm max-w-full overflow-x-auto bg-white">
                <InvoicePreview data={data} />
              </div>
-          </div>
-        </div>
-      )}
-
-      {/* Reset Confirm Modal */}
-      {showResetConfirm && (
-        <div className="fixed inset-0 z-50 bg-black/50 dark:bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 p-6 sm:p-8 border border-gray-200 dark:border-zinc-800 max-w-md w-full shadow-2xl">
-            <h3 className="text-xl font-bold mb-4 tracking-tight text-black dark:text-white">Reset Invoice?</h3>
-            <p className="text-gray-500 dark:text-zinc-400 text-sm mb-8 leading-relaxed">
-              Are you sure you want to reset all data and clear the invoice? This action cannot be undone and will delete all line items.
-            </p>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={() => setShowResetConfirm(false)}
-                className="px-4 py-2 text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmReset}
-                className="px-4 py-2 bg-red-600 text-white text-sm font-bold uppercase tracking-wider hover:bg-red-700 active:scale-95 transition-all"
-              >
-                Yes, Reset
-              </button>
-            </div>
           </div>
         </div>
       )}

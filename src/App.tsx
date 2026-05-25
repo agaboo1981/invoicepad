@@ -1,0 +1,223 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect } from 'react';
+import { Download, RotateCcw, Eye, X } from 'lucide-react';
+import { InvoiceData } from './types';
+import { InvoiceForm } from './components/InvoiceForm';
+import { InvoicePreview } from './components/InvoicePreview';
+import { AdSlot } from './components/AdSlot';
+import { CURRENCIES } from './utils';
+import { useTranslation } from './i18n';
+
+const getInitialData = (): InvoiceData => {
+  const saved = localStorage.getItem('invoicer_data');
+  if (saved) {
+    try {
+      const parsedData = JSON.parse(saved);
+      if (!parsedData.locale) parsedData.locale = 'en-US';
+      return parsedData;
+    } catch (e) {
+      console.error("Failed to parse saved invoice data");
+    }
+  }
+
+  // Auto detect logic based on user's browser language
+  const navLang = typeof navigator !== 'undefined' ? navigator.language : 'en-US';
+  const baseLang = navLang.split('-')[0].toLowerCase();
+  
+  let matchedCurr = CURRENCIES.find(c => c.locale === navLang) || 
+                    CURRENCIES.find(c => c.locale.toLowerCase().startsWith(baseLang));
+                    
+  const locale = matchedCurr?.locale || 'en-US';
+  const currency = matchedCurr?.code || 'USD';
+
+  return {
+    invoiceNumber: 'INV-0001',
+    issueDate: new Date().toISOString().split('T')[0],
+    dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 14 days from now
+    currency,
+    locale,
+    taxRate: 0,
+    discount: 0,
+    fromDetails: '',
+    toDetails: '',
+    items: [],
+    notes: '',
+    logo: '',
+    paymentQrLink: '',
+    pdfFileName: 'Invoice_0001',
+    isTaxInclusive: false,
+    signature: '',
+    signatureLabel: '',
+  };
+};
+
+export default function App() {
+  const [data, setData] = useState<InvoiceData>(getInitialData);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+
+  // Load from local storage on mount (done primarily via initializer now)
+
+  const t = useTranslation(data.locale);
+
+  // Save to local storage on change
+  useEffect(() => {
+    localStorage.setItem('invoicer_data', JSON.stringify(data));
+  }, [data]);
+
+  const handlePrint = () => {
+    const originalTitle = document.title;
+    document.title = data.pdfFileName || `${t('invoice')}_${data.invoiceNumber || t('draft')}`;
+    window.print();
+    document.title = originalTitle;
+  };
+
+  const handleReset = () => {
+    if (window.confirm('Are you sure you want to reset all data and clear the invoice? This cannot be undone.')) {
+      setData(getInitialData());
+    }
+  };
+
+  return (
+    <div className="min-h-screen font-sans bg-[#fafafa] dark:bg-zinc-950 text-black dark:text-zinc-100">
+      
+      {/* Platform Top Ad Slot - purely for layout context */}
+      <div className="w-full bg-white dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-800 py-4 no-print flex justify-center">
+        <AdSlot label="Top Banner Advertisement" className="w-[728px] h-[90px] hidden md:flex" />
+        <AdSlot label="Mobile Ad" className="w-[320px] h-[50px] flex md:hidden" />
+      </div>
+
+      <header className="border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 no-print sticky top-0 z-10 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-black dark:text-white font-semibold tracking-tight text-lg">
+            <span className="font-mono bg-black dark:bg-white text-white dark:text-black px-2 py-0.5 text-sm">inv</span>
+            invoice<span className="text-gray-400 dark:text-zinc-500">pad.shop</span>
+          </div>
+          
+          <button 
+            onClick={handlePrint}
+            className="bg-black dark:bg-white text-white dark:text-black px-5 py-2 text-sm font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors"
+          >
+            <Download size={16} />
+            {t('downloadPdf')}
+          </button>
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-4 lg:px-8 py-8 lg:py-12 no-print relative">
+        <div className="grid xl:grid-cols-[1fr_minmax(0,1fr)] gap-10 items-start">
+          
+          {/* Left Column: Form */}
+          <div className="xl:sticky xl:top-[6rem] xl:max-h-[calc(100vh-8rem)] xl:overflow-y-auto pr-0 xl:pr-4 custom-scrollbar">
+            <div className="flex items-start justify-between mb-8 gap-4">
+              <p className="text-gray-500 dark:text-zinc-400 max-w-xl text-sm leading-relaxed pr-4">
+                {t('appDesc')}
+              </p>
+              <div className="flex flex-col sm:flex-row items-end sm:items-center gap-4 shrink-0">
+                <button 
+                  onClick={() => setShowPreviewModal(true)}
+                  className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
+                >
+                  <Eye size={14} /> {t('preview')}
+                </button>
+                <button 
+                  onClick={handleReset}
+                  className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
+                >
+                  <RotateCcw size={14} /> {t('resetAll')}
+                </button>
+              </div>
+            </div>
+            <InvoiceForm data={data} onChange={setData} />
+            
+            {/* Inline Rectangle Ad */}
+            <div className="mt-12 flex justify-center border-t border-gray-200 dark:border-zinc-800 pt-8 hidden sm:flex">
+                <AdSlot label="Box Ad Placeholder" className="w-[300px] h-[250px]" />
+            </div>
+          </div>
+
+          {/* Right Column: Live Preview */}
+          <div className="xl:sticky xl:top-[6rem]">
+             <div className="bg-gray-200 dark:bg-zinc-800 p-2 sm:p-4 rounded-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] border border-gray-300 dark:border-zinc-700 relative">
+               <InvoicePreview data={data} />
+             </div>
+          </div>
+
+        </div>
+      </main>
+
+      {/* SEO Content Section (Bottom) */}
+      <section className="bg-white dark:bg-zinc-900 border-t border-gray-200 dark:border-zinc-800 mt-16 no-print transition-colors">
+        <div className="max-w-4xl mx-auto px-4 py-16 sm:py-24 space-y-12 text-black dark:text-white">
+          <div className="text-center space-y-4">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">{t('seoTitle')}</h1>
+            <p className="text-gray-500 dark:text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto">{t('seoDesc')}</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-8 pt-8 border-t border-gray-100 dark:border-zinc-800/50">
+            <div>
+              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF1Title')}</h2>
+              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF1Desc')}</p>
+            </div>
+            <div>
+              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF2Title')}</h2>
+              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF2Desc')}</p>
+            </div>
+            <div>
+              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF3Title')}</h2>
+              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF3Desc')}</p>
+            </div>
+            <div>
+              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF4Title')}</h2>
+              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF4Desc')}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 no-print py-8 text-center text-xs text-gray-400 dark:text-zinc-500 font-mono transition-colors">
+        <p>&copy; {new Date().getFullYear()} InvoicePad. All rights reserved.</p>
+      </footer>
+
+      {/* Hidden print container that takes over during window.print() */}
+      <div className="hidden print:block absolute inset-0 z-50 bg-white" id="print-view-wrapper">
+         <InvoicePreview data={data} />
+      </div>
+
+      {/* Full-Page Preview Modal */}
+      {showPreviewModal && (
+        <div className="fixed inset-0 z-50 bg-gray-200 dark:bg-zinc-950 overflow-y-auto flex flex-col no-print">
+          <div className="sticky top-0 bg-white dark:bg-zinc-900 border-b border-gray-300 dark:border-zinc-800 p-4 flex justify-between items-center shadow-sm z-10 transition-colors">
+            <span className="font-bold uppercase tracking-widest text-sm text-black dark:text-white flex items-center gap-2">
+              <Eye size={16} /> {t('preview')}
+            </span>
+            <div className="flex items-center gap-6">
+              <button 
+                onClick={handlePrint}
+                className="text-black dark:text-white hover:text-gray-600 dark:hover:text-zinc-300 flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                <Download size={16} /> PDF
+              </button>
+              <button
+                onClick={() => setShowPreviewModal(false)}
+                className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                <X size={20} /> Close
+              </button>
+            </div>
+          </div>
+          <div className="p-4 sm:p-8 flex-1 flex justify-center items-start">
+             <div className="border border-gray-300 dark:border-zinc-700 relative shadow-sm max-w-full overflow-x-auto bg-white">
+               <InvoicePreview data={data} />
+             </div>
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+}
+

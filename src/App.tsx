@@ -99,10 +99,10 @@ export default function App() {
       </div>
 
       <header className="border-b border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 no-print sticky top-0 z-10 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-black dark:text-white font-semibold tracking-tight text-lg">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 min-h-16 py-2 sm:py-0 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-black dark:text-white font-semibold tracking-tight text-base sm:text-lg min-w-0">
             <span className="font-mono bg-black dark:bg-white text-white dark:text-black px-2 py-0.5 text-sm">inv</span>
-            invoice<span className="text-gray-400 dark:text-zinc-500">pad.shop</span>
+            <span className="truncate">invoice<span className="text-gray-400 dark:text-zinc-500 hidden sm:inline">pad.shop</span></span>
           </div>
           
           <button 
@@ -223,26 +223,26 @@ export default function App() {
       {/* Full-Page Preview Modal */}
       {showPreviewModal && (
         <div className="fixed inset-0 z-50 bg-gray-200 dark:bg-zinc-950 overflow-y-auto flex flex-col no-print">
-          <div className="sticky top-0 bg-white dark:bg-zinc-900 border-b border-gray-300 dark:border-zinc-800 p-4 flex justify-between items-center shadow-sm z-10 transition-colors">
+          <div className="sticky top-0 bg-white dark:bg-zinc-900 border-b border-gray-300 dark:border-zinc-800 p-3 sm:p-4 flex justify-between items-center gap-3 shadow-sm z-10 transition-colors">
             <span className="font-bold uppercase tracking-widest text-sm text-black dark:text-white flex items-center gap-2">
               <Eye size={16} /> {t('preview')}
             </span>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3 sm:gap-6">
               <button 
                 onClick={handlePrint}
-                className="text-black dark:text-white hover:text-gray-600 dark:hover:text-zinc-300 flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors"
+                className="text-black dark:text-white hover:text-gray-600 dark:hover:text-zinc-300 flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors"
               >
                 <Download size={16} /> PDF
               </button>
               <button
                 onClick={() => setShowPreviewModal(false)}
-                className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-xs font-bold uppercase tracking-wider transition-colors"
+                className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white flex items-center gap-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-colors"
               >
                 <X size={20} /> Close
               </button>
             </div>
           </div>
-          <div className="p-4 sm:p-8 flex-1 flex justify-center items-start">
+          <div className="p-3 sm:p-8 flex-1 flex justify-center items-start">
              <div className="border border-gray-300 dark:border-zinc-700 relative shadow-sm max-w-full overflow-x-auto bg-white">
                <InvoicePreview data={data} />
              </div>

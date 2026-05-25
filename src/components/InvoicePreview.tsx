@@ -15,34 +15,34 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
   return (
     <div 
       id="invoice-preview" 
-      className="bg-white border text-sm border-gray-200 aspect-[1/1.414] w-full min-w-[700px] max-w-[800px] mx-auto flex flex-col font-sans mb-8 print:border-none uppercase-labels"
+      className="bg-white border text-sm border-gray-200 aspect-[1/1.414] w-full min-w-[320px] sm:min-w-[640px] max-w-[800px] mx-auto flex flex-col font-sans mb-8 print:border-none uppercase-labels"
     >
-      <div className="p-8 sm:p-12 flex-1 flex flex-col">
+      <div className="p-4 sm:p-8 lg:p-12 flex-1 flex flex-col">
         {/* Header */}
-        <div className="flex justify-between items-start mb-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-black mb-1">{t('invoice')}</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-black mb-1">{t('invoice')}</h1>
             <p className="font-mono text-gray-500 text-xs mt-1">#{data.invoiceNumber || '---'}</p>
           </div>
-          <div className="text-right flex items-center justify-end gap-3">
+          <div className="w-full sm:w-auto text-left sm:text-right flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3">
             {data.companyName && (
-              <span className="font-bold text-xl tracking-tight text-gray-800">{data.companyName}</span>
+              <span className="font-bold text-lg sm:text-xl tracking-tight text-gray-800 break-words">{data.companyName}</span>
             )}
             {data.logo && (
-              <img src={data.logo} alt="Company Logo" className="max-h-16 max-w-[200px] object-contain" />
+              <img src={data.logo} alt="Company Logo" className="max-h-14 sm:max-h-16 max-w-[160px] sm:max-w-[200px] object-contain" />
             )}
           </div>
         </div>
 
         {/* Addresses */}
-        <div className="grid grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div>
             <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('from')}</h3>
             <pre className="font-sans whitespace-pre-wrap text-black leading-relaxed font-medium">
               {data.fromDetails || '---'}
             </pre>
           </div>
-          <div className="text-right">
+          <div className="text-left sm:text-right">
             <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('billedTo')}</h3>
             <pre className="font-sans whitespace-pre-wrap text-black leading-relaxed font-medium">
               {data.toDetails || '---'}
@@ -51,12 +51,12 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
         </div>
 
         {/* Dates */}
-        <div className="grid grid-cols-2 gap-8 mb-12 py-4 border-y border-gray-100">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12 py-4 border-y border-gray-100">
           <div>
             <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">{t('issueDate')}</h3>
             <p className="font-mono text-black">{data.issueDate || '---'}</p>
           </div>
-          <div className="text-right">
+          <div className="text-left sm:text-right">
             <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-1">{t('dueDate')}</h3>
             <p className="font-mono text-black">{data.dueDate || '---'}</p>
           </div>
@@ -120,7 +120,7 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
         </div>
 
         {/* Final Section: Notes, Signature & QR Code */}
-        <div className="mt-auto border-t border-gray-100 pt-8 flex justify-between items-end gap-8">
+        <div className="mt-auto border-t border-gray-100 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-8">
           <div className="flex-1 space-y-6">
             {data.notes && (
               <div>
@@ -141,7 +141,7 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
             )}
           </div>
           {data.paymentQrLink && (
-            <div className="flex flex-col items-end shrink-0">
+            <div className="flex flex-col items-start sm:items-end shrink-0">
               <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('scanToPay')}</h3>
               <div className="p-2 border border-gray-200 bg-white shadow-sm">
                 <QRCodeSVG value={data.paymentQrLink} size={72} level="M" />

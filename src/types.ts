@@ -18,6 +18,7 @@ export interface InvoiceData {
   items: InvoiceItem[];
   notes: string;
   logo?: string;
+  companyName?: string;
   paymentQrLink?: string;
   pdfFileName?: string;
   isTaxInclusive?: boolean;

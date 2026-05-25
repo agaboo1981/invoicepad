@@ -105,39 +105,48 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
       {/* Details Section */}
       <section className="space-y-6">
         <h2 className="text-xs font-bold uppercase tracking-widest border-b border-gray-200 dark:border-zinc-800 pb-2 text-black dark:text-white">{t('branding')}</h2>
-        <div className="mb-6">
-          <label className={labelClass}>{t('logo')}</label>
-          {data.logo ? (
-            <div className="flex items-center gap-4 bg-gray-50 dark:bg-zinc-900 p-4 border border-gray-200 dark:border-zinc-800">
-              <img src={data.logo} alt={t('logo')} className="h-12 object-contain" />
-              <button 
-                type="button" 
-                onClick={() => updateField('logo', '')}
-                className="text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
-                title="Remove Logo"
-              >
-                <X size={18} />
-              </button>
-            </div>
-          ) : (
-            <div>
-              <input 
-                type="file" 
-                accept="image/*" 
-                className="hidden" 
-                ref={fileInputRef} 
-                onChange={handleLogoUpload} 
-              />
-              <button 
-                type="button" 
-                onClick={() => fileInputRef.current?.click()}
-                className="w-full flex justify-center items-center gap-2 border border-dashed border-gray-300 dark:border-zinc-700 px-4 py-6 text-sm text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-zinc-500 transition-colors bg-white dark:bg-zinc-900 font-medium"
-              >
-                <Upload size={16} /> {t('uploadLogo')}
-              </button>
-            </div>
-          )}
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label className={labelClass}>{t('companyName')}</label>
+            <input type="text" value={data.companyName || ''} onChange={(e) => updateField('companyName', e.target.value)} className={inputClass} placeholder="Acme Corp" />
+          </div>
+          <div>
+            <label className={labelClass}>{t('logo')}</label>
+            {data.logo ? (
+              <div className="flex items-center gap-4 bg-gray-50 dark:bg-zinc-900 p-4 border border-gray-200 dark:border-zinc-800">
+                <img src={data.logo} alt={t('logo')} className="h-12 object-contain" />
+                <button 
+                  type="button" 
+                  onClick={() => updateField('logo', '')}
+                  className="text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
+                  title="Remove Logo"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            ) : (
+              <div>
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  className="hidden" 
+                  ref={fileInputRef} 
+                  onChange={handleLogoUpload} 
+                />
+                <button 
+                  type="button" 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full flex justify-center items-center gap-2 border border-dashed border-gray-300 dark:border-zinc-700 px-4 py-2 text-sm text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-zinc-500 transition-colors bg-white dark:bg-zinc-900 font-medium"
+                  style={{ height: '38px' }}
+                >
+                  <Upload size={16} /> {t('uploadLogo')}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <label className={labelClass}>{t('invoiceNumber')}</label>

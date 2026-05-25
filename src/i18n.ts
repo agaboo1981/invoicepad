@@ -6,6 +6,7 @@ export const translations = {
     appDesc: "Create professional invoices instantly. All data is saved automatically to your device. No data is sent to external servers.",
     branding: "1. Branding & Details",
     logo: "Company Logo",
+    companyName: "Company Name",
     uploadLogo: "Upload Logo",
     invoiceNumber: "Invoice Number",
     pdfFilename: "PDF Filename",
@@ -56,7 +57,7 @@ export const translations = {
   es: {
     downloadPdf: "Descargar PDF", preview: "Vista Previa", resetAll: "Restablecer Todo",
     appDesc: "Cree facturas profesionales al instante. Todos los datos se guardan en su dispositivo localmente.",
-    branding: "1. Marca y Detalles", logo: "Logotipo", uploadLogo: "Subir Logotipo", invoiceNumber: "Número de Factura",
+    branding: "1. Marca y Detalles", logo: "Logotipo", companyName: "Nombre de la empresa", uploadLogo: "Subir Logotipo", invoiceNumber: "Número de Factura",
     pdfFilename: "Nombre del PDF", currencyRegion: "Moneda y Región", issueDate: "Fecha de Emisión", dueDate: "Fecha de Vencimiento",
     parties: "2. Partes", from: "De", to: "Para", lineItems: "3. Artículos", importCsv: "Importar CSV", addItem: "Añadir Artículo",
     itemDesc: "Descripción", qty: "Cant.", price: "Precio", noItems: "No hay artículos. Añada uno para empezar.",

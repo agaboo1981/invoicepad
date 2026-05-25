@@ -15,7 +15,7 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
   return (
     <div 
       id="invoice-preview" 
-      className="bg-white border text-sm border-gray-200 aspect-[1/1.414] w-full max-w-[800px] mx-auto flex flex-col font-sans mb-8 print:border-none uppercase-labels"
+      className="bg-white border text-sm border-gray-200 aspect-[1/1.414] w-full min-w-[700px] max-w-[800px] mx-auto flex flex-col font-sans mb-8 print:border-none uppercase-labels"
     >
       <div className="p-8 sm:p-12 flex-1 flex flex-col">
         {/* Header */}
@@ -24,7 +24,10 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
             <h1 className="text-3xl font-bold tracking-tight text-black mb-1">{t('invoice')}</h1>
             <p className="font-mono text-gray-500 text-xs mt-1">#{data.invoiceNumber || '---'}</p>
           </div>
-          <div className="text-right">
+          <div className="text-right flex items-center justify-end gap-3">
+            {data.companyName && (
+              <span className="font-bold text-xl tracking-tight text-gray-800">{data.companyName}</span>
+            )}
             {data.logo && (
               <img src={data.logo} alt="Company Logo" className="max-h-16 max-w-[200px] object-contain" />
             )}

@@ -11,6 +11,8 @@ import { InvoicePreview } from './components/InvoicePreview';
 import { AdSlot } from './components/AdSlot';
 import { CURRENCIES } from './utils';
 import { useTranslation } from './i18n';
+import jsPDF from 'jspdf';
+import domtoimage from 'dom-to-image-more';
 
 const getInitialData = (): InvoiceData => {
   const saved = localStorage.getItem('invoicer_data');
@@ -68,15 +70,47 @@ export default function App() {
     localStorage.setItem('invoicer_data', JSON.stringify(data));
   }, [data]);
 
-  const handlePrint = () => {
-    const originalTitle = document.title;
-    document.title = data.pdfFileName || `${t('invoice')}_${data.invoiceNumber || t('draft')}`;
-    window.print();
-    document.title = originalTitle;
+  const handlePrint = async () => {
+    const element = document.getElementById('invoice-preview');
+    if (!element) return;
+    
+    try {
+      // Temporarily remove max-width constraints if any layout adjustments are needed
+      const scale = 2; // Improve resolution
+      
+      const dataUrl = await domtoimage.toJpeg(element, {
+        quality: 0.98,
+        bgcolor: '#ffffff',
+        width: element.offsetWidth * scale,
+        height: element.offsetHeight * scale,
+        style: {
+          transform: `scale(${scale})`,
+          transformOrigin: 'top left',
+          width: `${element.offsetWidth}px`,
+          height: `${element.offsetHeight}px`,
+        }
+      });
+      
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'in',
+        format: 'letter'
+      });
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (element.offsetHeight * pdfWidth) / element.offsetWidth;
+      
+      pdf.addImage(dataUrl, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(data.pdfFileName || `${t('invoice')}_${data.invoiceNumber || t('draft')}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF', error);
+      alert('Failed to generate PDF. You might need to disable dark mode or try printing directly.');
+    }
   };
 
   const handleReset = () => {
     if (window.confirm('Are you sure you want to reset all data and clear the invoice? This cannot be undone.')) {
+      localStorage.removeItem('invoicer_data');
       setData(getInitialData());
     }
   };
@@ -99,9 +133,9 @@ export default function App() {
           
           <button 
             onClick={handlePrint}
-            className="bg-black dark:bg-white text-white dark:text-black px-5 py-2 text-sm font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors"
+            className="bg-black dark:bg-white text-white dark:text-black px-3 sm:px-5 py-1.5 sm:py-2 text-[10px] sm:text-sm font-bold uppercase tracking-wider flex items-center gap-1.5 sm:gap-2 hover:bg-gray-800 dark:hover:bg-zinc-200 transition-all border-2 border-black dark:border-white active:scale-95"
           >
-            <Download size={16} />
+            <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             {t('downloadPdf')}
           </button>
         </div>
@@ -141,7 +175,7 @@ export default function App() {
 
           {/* Right Column: Live Preview */}
           <div className="xl:sticky xl:top-[6rem]">
-             <div className="bg-gray-200 dark:bg-zinc-800 p-2 sm:p-4 rounded-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] border border-gray-300 dark:border-zinc-700 relative">
+             <div className="bg-gray-200 dark:bg-zinc-800 p-2 sm:p-4 rounded-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] border border-gray-300 dark:border-zinc-700 relative w-full overflow-x-auto">
                <InvoicePreview data={data} />
              </div>
           </div>

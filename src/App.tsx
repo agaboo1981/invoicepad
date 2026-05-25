@@ -11,8 +11,7 @@ import { InvoicePreview } from './components/InvoicePreview';
 import { AdSlot } from './components/AdSlot';
 import { CURRENCIES } from './utils';
 import { useTranslation } from './i18n';
-import jsPDF from 'jspdf';
-import domtoimage from 'dom-to-image-more';
+import { generateInvoicePDF } from './pdfGenerator';
 
 const getInitialData = (): InvoiceData => {
   const saved = localStorage.getItem('invoicer_data');
@@ -60,6 +59,7 @@ const getInitialData = (): InvoiceData => {
 export default function App() {
   const [data, setData] = useState<InvoiceData>(getInitialData);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // Load from local storage on mount (done primarily via initializer now)
 
@@ -71,48 +71,22 @@ export default function App() {
   }, [data]);
 
   const handlePrint = async () => {
-    const element = document.getElementById('invoice-preview');
-    if (!element) return;
-    
     try {
-      // Temporarily remove max-width constraints if any layout adjustments are needed
-      const scale = 2; // Improve resolution
-      
-      const dataUrl = await domtoimage.toJpeg(element, {
-        quality: 0.98,
-        bgcolor: '#ffffff',
-        width: element.offsetWidth * scale,
-        height: element.offsetHeight * scale,
-        style: {
-          transform: `scale(${scale})`,
-          transformOrigin: 'top left',
-          width: `${element.offsetWidth}px`,
-          height: `${element.offsetHeight}px`,
-        }
-      });
-      
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'in',
-        format: 'letter'
-      });
-      
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (element.offsetHeight * pdfWidth) / element.offsetWidth;
-      
-      pdf.addImage(dataUrl, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(data.pdfFileName || `${t('invoice')}_${data.invoiceNumber || t('draft')}.pdf`);
+      generateInvoicePDF(data, t);
     } catch (error) {
       console.error('Error generating PDF', error);
-      alert('Failed to generate PDF. You might need to disable dark mode or try printing directly.');
+      alert('Failed to generate PDF. Please check your data and try again.');
     }
   };
 
   const handleReset = () => {
-    if (window.confirm('Are you sure you want to reset all data and clear the invoice? This cannot be undone.')) {
-      localStorage.removeItem('invoicer_data');
-      setData(getInitialData());
-    }
+    setShowResetConfirm(true);
+  };
+
+  const confirmReset = () => {
+    localStorage.removeItem('invoicer_data');
+    setData(getInitialData());
+    setShowResetConfirm(false);
   };
 
   return (
@@ -247,6 +221,32 @@ export default function App() {
              <div className="border border-gray-300 dark:border-zinc-700 relative shadow-sm max-w-full overflow-x-auto bg-white">
                <InvoicePreview data={data} />
              </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reset Confirm Modal */}
+      {showResetConfirm && (
+        <div className="fixed inset-0 z-50 bg-black/50 dark:bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-zinc-900 p-6 sm:p-8 border border-gray-200 dark:border-zinc-800 max-w-md w-full shadow-2xl">
+            <h3 className="text-xl font-bold mb-4 tracking-tight text-black dark:text-white">Reset Invoice?</h3>
+            <p className="text-gray-500 dark:text-zinc-400 text-sm mb-8 leading-relaxed">
+              Are you sure you want to reset all data and clear the invoice? This action cannot be undone and will delete all line items.
+            </p>
+            <div className="flex justify-end gap-4">
+              <button
+                onClick={() => setShowResetConfirm(false)}
+                className="px-4 py-2 text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmReset}
+                className="px-4 py-2 bg-red-600 text-white text-sm font-bold uppercase tracking-wider hover:bg-red-700 active:scale-95 transition-all"
+              >
+                Yes, Reset
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -192,6 +192,22 @@ export default function App() {
               <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF4Desc')}</p>
             </div>
           </div>
+
+          <div className="pt-8 border-t border-gray-100 dark:border-zinc-800/50">
+            <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">Invoice Resources</h2>
+            <nav className="flex flex-wrap gap-4 text-sm">
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/freelancer-invoice-generator.html">Invoice Generator for Freelancers</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/consultant-invoice-template.html">Consultant Invoice Template</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-india.html">Invoice Generator India</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-usa.html">Invoice Generator USA</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-uk.html">Invoice Generator UK</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-canada.html">Invoice Generator Canada</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/self-employed-invoice-template.html">Self-Employed Invoice Template</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/hourly-invoice-template.html">Hourly Invoice Template</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/contractor-invoice-generator.html">Contractor Invoice Generator</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-template-guide.html">Invoice Template Guide</a>
+            </nav>
+          </div>
         </div>
       </section>
 
@@ -237,4 +253,3 @@ export default function App() {
     </div>
   );
 }
-

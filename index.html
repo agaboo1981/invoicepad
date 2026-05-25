@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Invoice Generator & Invoice Maker Online | InvoicePad</title>
-    <meta name="description" content="Create professional invoices online for free with InvoicePad. Add line items, taxes, discounts, logos and QR payments, then download print-ready PDF invoices instantly." />
+    <title id="meta-title">Free Invoice Generator & Invoice Maker Online | InvoicePad</title>
+    <meta id="meta-description" name="description" content="Create professional invoices online for free with InvoicePad. Add line items, taxes, discounts, logos and QR payments, then download print-ready PDF invoices instantly." />
     <meta name="keywords" content="free invoice generator, invoice maker online, invoice generator online, pdf invoice generator, professional invoice template, freelance invoice maker, small business invoicing, printable invoice" />
     <meta name="author" content="InvoicePad" />
     <meta name="application-name" content="InvoicePad" />
@@ -20,14 +20,14 @@
     <meta property="og:url" content="https://invoicepad.shop/" />
     <meta property="og:site_name" content="InvoicePad" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
-    <meta property="og:description" content="Build professional invoices in your browser, calculate taxes and discounts, add logos or QR payments, and export polished PDFs in seconds." />
+    <meta id="meta-og-title" property="og:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
+    <meta id="meta-og-description" property="og:description" content="Build professional invoices in your browser, calculate taxes and discounts, add logos or QR payments, and export polished PDFs in seconds." />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:url" content="https://invoicepad.shop/" />
-    <meta name="twitter:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
-    <meta name="twitter:description" content="Create free, print-ready invoices online with taxes, discounts, logos, QR payments and instant PDF export." />
+    <meta id="meta-twitter-title" name="twitter:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
+    <meta id="meta-twitter-description" name="twitter:description" content="Create free, print-ready invoices online with taxes, discounts, logos, QR payments and instant PDF export." />
 
     <!-- Structured Data (JSON-LD) for SEO -->
     <script type="application/ld+json">
@@ -85,6 +85,34 @@
     }
     </script>
 
+    <script>
+      (function () {
+        const variants = {
+          a: {
+            title: 'Free Invoice Generator & Invoice Maker Online | InvoicePad',
+            description: 'Create professional invoices online for free with InvoicePad. Add line items, taxes, discounts, logos and QR payments, then download print-ready PDF invoices instantly.'
+          },
+          b: {
+            title: 'Invoice Template & PDF Invoice Generator for Freelancers | InvoicePad',
+            description: 'Generate freelancer and small-business invoices in seconds. No signup, mobile-friendly editor, automatic totals, and instant print-ready PDF export.'
+          }
+        };
+        const params = new URLSearchParams(window.location.search);
+        const fromUrl = params.get('metaVariant');
+        const stored = localStorage.getItem('meta_variant');
+        const variant = fromUrl === 'b' || stored === 'b' ? 'b' : 'a';
+        localStorage.setItem('meta_variant', variant);
+        const meta = variants[variant];
+        document.title = meta.title;
+        const tags = ['meta-description', 'meta-og-title', 'meta-og-description', 'meta-twitter-title', 'meta-twitter-description'];
+        const values = [meta.description, meta.title, meta.description, meta.title, meta.description];
+        tags.forEach((id, index) => {
+          const el = document.getElementById(id);
+          if (el) el.setAttribute('content', values[index]);
+        });
+      })();
+    </script>
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8597685788577214" crossorigin="anonymous"></script>
   </head>
@@ -92,6 +120,18 @@
     <noscript>
       <h1>Free Invoice Generator Online</h1>
       <p>InvoicePad helps freelancers, contractors and small businesses create professional invoices online and export them as print-ready PDF files. Enable JavaScript to use the invoice editor.</p>
+      <ul>
+        <li><a href="/freelancer-invoice-generator.html">Invoice generator for freelancers</a></li>
+        <li><a href="/consultant-invoice-template.html">Consultant invoice template</a></li>
+        <li><a href="/invoice-generator-india.html">Invoice generator for India</a></li>
+        <li><a href="/invoice-generator-usa.html">Invoice generator for USA</a></li>
+        <li><a href="/invoice-generator-uk.html">Invoice generator for UK</a></li>
+        <li><a href="/invoice-generator-canada.html">Invoice generator for Canada</a></li>
+        <li><a href="/self-employed-invoice-template.html">Self-employed invoice template</a></li>
+        <li><a href="/hourly-invoice-template.html">Hourly invoice template</a></li>
+        <li><a href="/contractor-invoice-generator.html">Contractor invoice generator</a></li>
+        <li><a href="/invoice-template-guide.html">Invoice template guide</a></li>
+      </ul>
     </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

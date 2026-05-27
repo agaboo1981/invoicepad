@@ -59,9 +59,6 @@ export default function App() {
   const [data, setData] = useState<InvoiceData>(getInitialData);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [shareUrl, setShareUrl] = useState('https://invoicepad.shop/');
-  const [referralCode, setReferralCode] = useState('');
 
   // Load from local storage on mount (done primarily via initializer now)
 
@@ -71,33 +68,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('invoicer_data', JSON.stringify(data));
   }, [data]);
-
-  useEffect(() => {
-    const savedCode = localStorage.getItem('invoicepad_referral_code');
-    const randomSuffix = (() => {
-      if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID().slice(0, 8);
-      if (globalThis.crypto?.getRandomValues) {
-        const bytes = new Uint8Array(4);
-        globalThis.crypto.getRandomValues(bytes);
-        return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
-      }
-      return `${Date.now().toString(36)}-${Math.floor(Math.random() * 1e6).toString(36)}`.slice(0, 8);
-    })();
-    const code = savedCode || `invp-${randomSuffix}`;
-    if (!savedCode) {
-      localStorage.setItem('invoicepad_referral_code', code);
-    }
-    setReferralCode(code);
-
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get('ref');
-    if (ref) {
-      localStorage.setItem('invoicepad_ref', ref);
-    }
-
-    const base = window.location.origin || 'https://invoicepad.shop';
-    setShareUrl(`${base}/?ref=${encodeURIComponent(code)}`);
-  }, []);
 
   const handlePrint = async () => {
     try {
@@ -243,58 +213,21 @@ export default function App() {
             <aside className="border border-gray-200 dark:border-zinc-800 p-4 sm:p-5 rounded-sm bg-gray-50 dark:bg-zinc-950/50 space-y-4">
               <h2 className="text-sm font-bold uppercase tracking-wider flex items-center gap-2"><Share2 size={14} /> Share InvoicePad</h2>
               <p className="text-xs text-gray-500 dark:text-zinc-400 leading-relaxed">
-                Help other freelancers discover InvoicePad. Share your referral link organically on social media.
+                Help other freelancers discover InvoicePad. Share this tool with your network.
               </p>
               <div className="flex flex-wrap gap-2">
                 <button onClick={() => openShare('whatsapp')} className="px-3 py-2 border border-gray-300 dark:border-zinc-700 text-xs font-bold uppercase tracking-wider hover:bg-white dark:hover:bg-zinc-900 transition-colors">WhatsApp</button>
                 <button onClick={() => openShare('twitter')} className="px-3 py-2 border border-gray-300 dark:border-zinc-700 text-xs font-bold uppercase tracking-wider hover:bg-white dark:hover:bg-zinc-900 transition-colors">Twitter/X</button>
                 <button onClick={() => openShare('linkedin')} className="px-3 py-2 border border-gray-300 dark:border-zinc-700 text-xs font-bold uppercase tracking-wider hover:bg-white dark:hover:bg-zinc-900 transition-colors">LinkedIn</button>
               </div>
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase font-bold tracking-widest text-gray-400 dark:text-zinc-500">Referral Link ({referralCode})</label>
-                <div className="flex items-center gap-2">
-                  <input readOnly value={shareUrl} className="w-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-2 text-xs text-gray-600 dark:text-zinc-300" />
-                  <button onClick={handleCopyLink} className="px-3 py-2 border border-black dark:border-white text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-                    {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? 'Copied' : 'Copy share link'}
-                  </button>
-                </div>
-              </div>
             </aside>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-8 pt-8 border-t border-gray-100 dark:border-zinc-800/50">
-            <div>
-              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF1Title')}</h2>
-              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF1Desc')}</p>
-            </div>
-            <div>
-              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF2Title')}</h2>
-              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF2Desc')}</p>
-            </div>
-            <div>
-              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF3Title')}</h2>
-              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF3Desc')}</p>
-            </div>
-            <div>
-              <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">{t('seoF4Title')}</h2>
-              <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm">{t('seoF4Desc')}</p>
-            </div>
           </div>
 
           <div className="pt-8 border-t border-gray-100 dark:border-zinc-800/50">
             <h2 className="text-[10px] font-bold uppercase tracking-widest mb-3 text-gray-400 dark:text-zinc-500">Invoice Resources</h2>
             <nav className="flex flex-wrap gap-4 text-sm">
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/freelancer-invoice-generator.html">Invoice Generator for Freelancers</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/consultant-invoice-template.html">Consultant Invoice Template</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-india.html">Invoice Generator India</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-usa.html">Invoice Generator USA</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-uk.html">Invoice Generator UK</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-generator-canada.html">Invoice Generator Canada</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/self-employed-invoice-template.html">Self-Employed Invoice Template</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/hourly-invoice-template.html">Hourly Invoice Template</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/contractor-invoice-generator.html">Contractor Invoice Generator</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-template-guide.html">Invoice Template Guide</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/guide/compliance">Invoice Compliance Guide</a>
+              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/guide/getting-paid">Guide to Getting Paid</a>
             </nav>
           </div>
         </div>
@@ -304,9 +237,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 space-y-4">
           <p className="text-[11px] uppercase tracking-widest text-gray-500 dark:text-zinc-400">InvoicePad • Free invoice maker for freelancers and small businesses</p>
           <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px]">
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="/guide/compliance">Invoice Compliance Guide</a>
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="/guide/getting-paid">Guide to Getting Paid</a>
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="https://joshuaadesina.vercel.com" target="_blank" rel="noreferrer">
+            <a className="hover:text-black dark:hover:text-white transition-colors" href="https://joshuaadesina.vercel.app" target="_blank" rel="noreferrer">
               Portfolio <ExternalLink size={12} />
             </a>
           </nav>

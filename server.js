@@ -16,7 +16,7 @@ app.get('/health', (_req, res) => {
 app.use(express.static(distPath, {extensions: ['html']}));
 
 app.use((_req, res) => {
-  res.status(404).sendFile(path.join(distPath, 'index.html'));
+  res.status(404).json({error: 'Not Found'});
 });
 
 app.listen(port, () => {

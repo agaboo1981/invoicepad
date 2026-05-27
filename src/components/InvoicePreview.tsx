@@ -1,5 +1,4 @@
 import React from 'react';
-import { QRCodeSVG } from 'qrcode.react';
 import { InvoiceData } from '../types';
 import { calculateTotals, formatCurrency } from '../utils';
 import { useTranslation } from '../i18n';
@@ -11,6 +10,20 @@ interface InvoicePreviewProps {
 export function InvoicePreview({ data }: InvoicePreviewProps) {
   const t = useTranslation(data.locale);
   const { subtotal, discountAmount, taxAmount, total } = calculateTotals(data);
+  const [QRCodeSVG, setQRCodeSVG] = React.useState<React.ComponentType<{ value: string; size: number; level?: 'L' | 'M' | 'Q' | 'H' }> | null>(null);
+
+  React.useEffect(() => {
+    let active = true;
+    if (!data.paymentQrLink) return;
+    import('qrcode.react').then((mod) => {
+      if (active) {
+        setQRCodeSVG(() => mod.QRCodeSVG);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, [data.paymentQrLink]);
 
   return (
     <div 
@@ -144,7 +157,7 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
             <div className="flex flex-col items-start sm:items-end shrink-0">
               <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('scanToPay')}</h3>
               <div className="p-2 border border-gray-200 bg-white shadow-sm">
-                <QRCodeSVG value={data.paymentQrLink} size={72} level="M" />
+                {QRCodeSVG ? <QRCodeSVG value={data.paymentQrLink} size={72} level="M" /> : <div className="w-[72px] h-[72px] bg-gray-100" />}
               </div>
             </div>
           )}

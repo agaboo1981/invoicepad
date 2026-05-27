@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="meta-title">Free Invoice Generator & Invoice Maker Online | InvoicePad</title>
-    <meta id="meta-description" name="description" content="Create professional invoices online for free with InvoicePad. Add line items, taxes, discounts, logos and QR payments, then download print-ready PDF invoices instantly." />
-    <meta name="keywords" content="free invoice generator, invoice maker online, invoice generator online, pdf invoice generator, professional invoice template, freelance invoice maker, small business invoicing, printable invoice" />
+    <title>Free Invoice Generator & Free Invoice Maker | InvoicePad</title>
+    <meta name="description" content="InvoicePad is a free invoice generator and free invoice maker for freelancers and small businesses. Create professional invoices and download PDF instantly." />
+    <meta name="keywords" content="invoice generator, free invoice maker, freelancer invoice tool Nigeria, invoice template, online invoice generator, PDF invoice maker" />
     <meta name="author" content="InvoicePad" />
     <meta name="application-name" content="InvoicePad" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -20,14 +20,16 @@
     <meta property="og:url" content="https://invoicepad.shop/" />
     <meta property="og:site_name" content="InvoicePad" />
     <meta property="og:locale" content="en_US" />
-    <meta id="meta-og-title" property="og:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
-    <meta id="meta-og-description" property="og:description" content="Build professional invoices in your browser, calculate taxes and discounts, add logos or QR payments, and export polished PDFs in seconds." />
+    <meta property="og:title" content="Free Invoice Generator & Free Invoice Maker | InvoicePad" />
+    <meta property="og:description" content="Create professional invoices in minutes with InvoicePad. Built for freelancers and small businesses." />
+    <meta property="og:image" content="https://invoicepad.shop/og-image.svg" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:url" content="https://invoicepad.shop/" />
-    <meta id="meta-twitter-title" name="twitter:title" content="Free Invoice Generator & Invoice Maker Online | InvoicePad" />
-    <meta id="meta-twitter-description" name="twitter:description" content="Create free, print-ready invoices online with taxes, discounts, logos, QR payments and instant PDF export." />
+    <meta name="twitter:title" content="Free Invoice Generator & Free Invoice Maker | InvoicePad" />
+    <meta name="twitter:description" content="Free invoice maker for freelancers and small businesses with instant PDF export." />
+    <meta name="twitter:image" content="https://invoicepad.shop/og-image.svg" />
 
     <!-- Structured Data (JSON-LD) for SEO -->
     <script type="application/ld+json">
@@ -83,34 +85,6 @@
         }
       ]
     }
-    </script>
-
-    <script>
-      (function () {
-        const variants = {
-          a: {
-            title: 'Free Invoice Generator & Invoice Maker Online | InvoicePad',
-            description: 'Create professional invoices online for free with InvoicePad. Add line items, taxes, discounts, logos and QR payments, then download print-ready PDF invoices instantly.'
-          },
-          b: {
-            title: 'Invoice Template & PDF Invoice Generator for Freelancers | InvoicePad',
-            description: 'Generate freelancer and small-business invoices in seconds. No signup, mobile-friendly editor, automatic totals, and instant print-ready PDF export.'
-          }
-        };
-        const params = new URLSearchParams(window.location.search);
-        const fromUrl = params.get('metaVariant');
-        const stored = localStorage.getItem('meta_variant');
-        const variant = fromUrl === 'b' || stored === 'b' ? 'b' : 'a';
-        localStorage.setItem('meta_variant', variant);
-        const meta = variants[variant];
-        document.title = meta.title;
-        const tags = ['meta-description', 'meta-og-title', 'meta-og-description', 'meta-twitter-title', 'meta-twitter-description'];
-        const values = [meta.description, meta.title, meta.description, meta.title, meta.description];
-        tags.forEach((id, index) => {
-          const el = document.getElementById(id);
-          if (el) el.setAttribute('content', values[index]);
-        });
-      })();
     </script>
 
     <!-- Google AdSense -->

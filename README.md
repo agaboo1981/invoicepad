@@ -1,102 +1,72 @@
-# InvoicePad — AI-Powered Invoice Generator for Businesses
+# InvoicePad
 
-**InvoicePad** is a next-generation web application that helps businesses generate professional invoices quickly and efficiently. Powered by modern AI technology, InvoicePad streamlines invoicing, saves time, and ensures accuracy for entrepreneurs, freelancers, and small businesses worldwide.
+InvoicePad is a free invoice generator and free invoice maker for freelancers and small businesses. It runs as a Vite React app with static SEO landing pages and AdSense-compliance pages.
 
-<a href="https://ai.studio/apps/609c2bf7-8e8a-49eb-9224-0cf16fc2ca56"><img src="https://img.shields.io/badge/Live%20Demo-Try%20Now-blue"></a>
-<a><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+## Live Site
+- Primary: https://invoicepad.shop
+- Portfolio: https://joshuaadesina.vercel.com
+- Contact: giganticjoshua@gmail.com
 
----
+## Project Structure
+- App entry: `/tmp/workspace/agaboo1981/invoicepad/index.html`
+- React app: `/tmp/workspace/agaboo1981/invoicepad/src`
+- Static pages: `/tmp/workspace/agaboo1981/invoicepad/*.html`
+- Public assets: `/tmp/workspace/agaboo1981/invoicepad/public`
 
-## 🚀 Features
+## Key Pages
+### Product + SEO pages
+- `/`
+- `/freelancer-invoice-generator.html`
+- `/consultant-invoice-template.html`
+- `/invoice-generator-india.html`
+- `/invoice-template-guide.html`
+- `/invoice-generator-usa.html`
+- `/invoice-generator-uk.html`
+- `/invoice-generator-canada.html`
+- `/self-employed-invoice-template.html`
+- `/hourly-invoice-template.html`
+- `/contractor-invoice-generator.html`
 
-- **AI-Powered Invoice Creation**: Automatically generate invoices using intelligent suggestions.
-- **Multi-Currency &amp; Multi-Client Support**: Suitable for global businesses and freelancers.
-- **Professional Invoice Templates**: Stand out with customizable, ready-to-use templates.
-- **Secure and Cloud-Based**: Access your invoices anywhere, anytime, with robust data protection.
-- **Easy Export &amp; Print**: Instantly export invoices as PDF or print them.
-- **Integrations**: Easily connect with other business tools (coming soon).
+### Compliance + trust pages
+- `/about.html`
+- `/contact.html`
+- `/privacy-policy.html`
+- `/terms-of-service.html`
 
----
+## SEO + Compliance Notes
+- Canonical, Open Graph, and Twitter metadata are present on all pages.
+- Shared OG image: `/og-image.svg`.
+- Sitemap includes all product and legal pages: `/sitemap.xml`.
+- Robots file references sitemap: `/robots.txt`.
+- Footer on app and static pages links to About, Contact, Privacy Policy, Terms of Service, and portfolio.
 
-## 🌍 Use Cases
+## Development
+```bash
+cd /tmp/workspace/agaboo1981/invoicepad
+npm install
+npm run dev
+```
 
-- Issue invoices in seconds for multiple clients
-- Manage and track invoicing activity in one dashboard
-- Ideal for freelancers, consultants, startups, and SMBs seeking automation
+## Validation
+```bash
+cd /tmp/workspace/agaboo1981/invoicepad
+npm run lint
+npm run build
+```
 
----
+## Production Deployment
+```bash
+cd /tmp/workspace/agaboo1981/invoicepad
+npm install
+npm run build
+npm run start
+```
+The server serves `dist/` on `PORT` (default `8080`). Health check endpoint: `/health`.
 
-## 🔍 Why Choose InvoicePad?
-
-- Eliminate manual errors and administrative hassle
-- Deliver professional invoices tailored to client needs
-- AI-enhanced workflow boosts business efficiency
-- Built with TypeScript for speed, security, and reliability
-
----
-
-## 🛠️ Getting Started
-
-**Prerequisites**: Node.js (latest recommended)
-
-1. Clone the repository:  
-   `git clone https://github.com/agaboo1981/invoicepad.git`
-2. Install dependencies:  
-   `npm install`
-3. Set your `GEMINI_API_KEY` in `.env.local`
-4. Run locally:  
-   `npm run dev`
-
----
-
-## 🚢 Deployment
-
-1. Install dependencies:  
-   `npm install`
-2. Build production assets:  
-   `npm run build`
-3. Start production server:  
-   `npm run start`
-
-The app serves built files from `dist/` and listens on `PORT` (defaults to `8080`).  
-Health check endpoint: `/health`
-
----
-
-## 📸 Screenshots
-<img src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png">  
-_Live demo available: <a href="https://ai.studio/apps/609c2bf7-8e8a-49eb-9224-0cf16fc2ca56">AI Studio App</a>_
-
----
-
-## ❓ FAQ
-
-**Is InvoicePad free?**  
-&gt; Yes, you can use the core features for free and upgrade as your business grows.
-
-**Can I customize invoice templates?**  
-&gt; Yes, with easy template editing and future integration plans.
-
-**Which businesses can use InvoicePad?**  
-&gt; Any business, freelancer, or startup needing fast, professional invoicing solutions.
-
----
-
-## 📈 SEO Keywords (Topics)
-_invoicing, invoice generator, business tools, AI invoicing, small business, SaaS, online invoice, automation, billing, freelance, client management_
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please open issues with suggestions or check out the CONTRIBUTING guidelines.
-
----
-
-## 📄 License
-
-Licensed under the MIT License.
-
----
-
-&gt; _A site that helps businesses in generating invoices. AI-powered, secure, and designed for efficiency._
+## Post-Deploy Verification
+1. Open key routes and confirm no 404s.
+2. Confirm legal pages are one click away from the homepage footer.
+3. Validate metadata with social preview tools (Open Graph + Twitter).
+4. Submit `https://invoicepad.shop/sitemap.xml` in Google Search Console.
+5. Run URL inspection for newly added legal pages.
+6. Run Lighthouse on homepage and important landing pages and track scores over time.

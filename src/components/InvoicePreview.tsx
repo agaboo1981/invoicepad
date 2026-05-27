@@ -15,18 +15,18 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
   return (
     <div 
       id="invoice-preview" 
-      className="bg-white border text-sm border-gray-200 aspect-[1/1.414] w-full min-w-[320px] sm:min-w-[640px] max-w-[800px] mx-auto flex flex-col font-sans mb-8 print:border-none uppercase-labels"
+      className="bg-white border text-sm border-gray-200 aspect-[1/1.414] w-full min-w-0 max-w-[800px] mx-auto flex flex-col font-sans mb-8 print:border-none uppercase-labels"
     >
       <div className="p-4 sm:p-8 lg:p-12 flex-1 flex flex-col">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6 mb-8 sm:mb-12">
-          <div>
+          <div className="w-full sm:w-auto">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-black mb-1">{t('invoice')}</h1>
-            <p className="font-mono text-gray-500 text-xs mt-1">#{data.invoiceNumber || '---'}</p>
+            <p className="font-mono text-gray-500 text-xs mt-1 break-all">#{data.invoiceNumber || '---'}</p>
           </div>
           <div className="w-full sm:w-auto text-left sm:text-right flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3">
             {data.companyName && (
-              <span className="font-bold text-lg sm:text-xl tracking-tight text-gray-800 break-words">{data.companyName}</span>
+              <span className="font-bold text-lg sm:text-xl tracking-tight text-gray-800 break-words max-w-full">{data.companyName}</span>
             )}
             {data.logo && (
               <img src={data.logo} alt="Company Logo" className="max-h-14 sm:max-h-16 max-w-[160px] sm:max-w-[200px] object-contain" />
@@ -38,13 +38,13 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div>
             <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('from')}</h3>
-            <pre className="font-sans whitespace-pre-wrap text-black leading-relaxed font-medium">
+            <pre className="font-sans whitespace-pre-wrap break-words text-black leading-relaxed font-medium">
               {data.fromDetails || '---'}
             </pre>
           </div>
           <div className="text-left sm:text-right">
             <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('billedTo')}</h3>
-            <pre className="font-sans whitespace-pre-wrap text-black leading-relaxed font-medium">
+            <pre className="font-sans whitespace-pre-wrap break-words text-black leading-relaxed font-medium">
               {data.toDetails || '---'}
             </pre>
           </div>
@@ -64,33 +64,35 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
 
         {/* Items Table */}
         <div className="mb-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b-2 border-black">
-                <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 w-full">{t('itemDesc')}</th>
-                <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 whitespace-nowrap text-right">{t('qty')}</th>
-                <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 whitespace-nowrap text-right">{t('price')}</th>
-                <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 whitespace-nowrap text-right">{t('total')}</th>
-              </tr>
-            </thead>
-            <tbody className="font-mono text-sm">
-              {data.items.length === 0 && (
-                <tr>
-                  <td colSpan={4} className="py-4 text-center text-gray-300 text-xs italic">{t('noItems')}</td>
+          <div className="w-full overflow-x-auto">
+            <table className="w-full min-w-[32rem] text-left border-collapse">
+              <thead>
+                <tr className="border-b-2 border-black">
+                  <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 w-full">{t('itemDesc')}</th>
+                  <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 whitespace-nowrap text-right">{t('qty')}</th>
+                  <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 whitespace-nowrap text-right">{t('price')}</th>
+                  <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 whitespace-nowrap text-right">{t('total')}</th>
                 </tr>
-              )}
-              {data.items.map((item, index) => (
-                <tr key={item.id} className="border-b border-gray-100">
-                  <td className="py-4 px-1 font-sans font-medium text-black">{item.description}</td>
-                  <td className="py-4 px-1 text-right text-gray-600">{item.quantity}</td>
-                  <td className="py-4 px-1 text-right text-gray-600">{formatCurrency(item.price, data.currency, data.locale)}</td>
-                  <td className="py-4 px-1 text-right font-medium text-black">
-                    {formatCurrency(item.quantity * item.price, data.currency, data.locale)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="font-mono text-sm">
+                {data.items.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="py-4 text-center text-gray-300 text-xs italic">{t('noItems')}</td>
+                  </tr>
+                )}
+                {data.items.map((item) => (
+                  <tr key={item.id} className="border-b border-gray-100">
+                    <td className="py-4 px-1 font-sans font-medium text-black break-words">{item.description}</td>
+                    <td className="py-4 px-1 text-right text-gray-600">{item.quantity}</td>
+                    <td className="py-4 px-1 text-right text-gray-600">{formatCurrency(item.price, data.currency, data.locale)}</td>
+                    <td className="py-4 px-1 text-right font-medium text-black">
+                      {formatCurrency(item.quantity * item.price, data.currency, data.locale)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* Totals */}
@@ -123,9 +125,9 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
         <div className="mt-auto border-t border-gray-100 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-8">
           <div className="flex-1 space-y-6">
             {data.notes && (
-              <div>
+              <div className="max-w-full">
                 <h3 className="text-[10px] uppercase font-bold text-gray-400 tracking-wider mb-2">{t('notesTerms')}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed max-w-2xl whitespace-pre-wrap">{data.notes}</p>
+                <p className="text-xs text-gray-500 leading-relaxed max-w-2xl whitespace-pre-wrap break-words">{data.notes}</p>
               </div>
             )}
             

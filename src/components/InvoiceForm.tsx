@@ -97,10 +97,10 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
   };
 
   const labelClass = "block text-[10px] uppercase font-bold text-gray-500 dark:text-zinc-500 tracking-widest mb-1.5";
-  const inputClass = "w-full border border-gray-300 dark:border-zinc-700 px-3 py-2 text-sm rounded-none focus:outline-none focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white bg-white dark:bg-zinc-900 transition-shadow text-black dark:text-white";
+  const inputClass = "w-full min-h-11 border border-gray-300 dark:border-zinc-700 px-3 py-2 text-base sm:text-sm rounded-none focus:outline-none focus:border-black dark:focus:border-white focus:ring-1 focus:ring-black dark:focus:ring-white bg-white dark:bg-zinc-900 transition-shadow text-black dark:text-white";
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8 sm:space-y-10">
       
       {/* Details Section */}
       <section className="space-y-6">
@@ -119,7 +119,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                 <button 
                   type="button" 
                   onClick={() => updateField('logo', '')}
-                  className="text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
+                  className="text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors min-h-11 min-w-11 inline-flex items-center justify-center"
                   title="Remove Logo"
                 >
                   <X size={18} />
@@ -137,8 +137,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                 <button 
                   type="button" 
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full flex justify-center items-center gap-2 border border-dashed border-gray-300 dark:border-zinc-700 px-4 py-2 text-sm text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-zinc-500 transition-colors bg-white dark:bg-zinc-900 font-medium"
-                  style={{ height: '38px' }}
+                  className="w-full min-h-11 flex justify-center items-center gap-2 border border-dashed border-gray-300 dark:border-zinc-700 px-4 py-2 text-base sm:text-sm text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-zinc-500 transition-colors bg-white dark:bg-zinc-900 font-medium"
                 >
                   <Upload size={16} /> {t('uploadLogo')}
                 </button>
@@ -208,10 +207,10 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
               ref={csvInputRef} 
               onChange={handleCsvImport} 
             />
-            <button type="button" onClick={() => csvInputRef.current?.click()} className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors">
+            <button type="button" onClick={() => csvInputRef.current?.click()} className="text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors min-h-11 px-2">
               <UploadCloud size={14} /> {t('importCsv')}
             </button>
-            <button type="button" onClick={addItem} className="text-black dark:text-white hover:text-gray-600 dark:hover:text-zinc-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors">
+            <button type="button" onClick={addItem} className="text-black dark:text-white hover:text-gray-600 dark:hover:text-zinc-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-colors min-h-11 px-2">
               <Plus size={14} /> {t('addItem')}
             </button>
           </div>
@@ -232,7 +231,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                 <label className={labelClass}>{t('price')}</label>
                 <input type="number" min="0" step="any" value={item.price} onChange={(e) => updateItem(item.id, 'price', parseFloat(e.target.value) || 0)} className={inputClass} />
               </div>
-              <button type="button" onClick={() => removeItem(item.id)} className="absolute top-2 right-2 sm:static sm:mb-2 text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors" title="Remove Item">
+              <button type="button" onClick={() => removeItem(item.id)} className="absolute top-1 right-1 sm:static sm:mb-2 text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors min-h-11 min-w-11 inline-flex items-center justify-center" title="Remove Item">
                 <Trash2 size={18} />
               </button>
             </div>
@@ -253,7 +252,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
             <label className={labelClass}>{t('taxRate')}</label>
             <input type="number" min="0" step="0.1" value={data.taxRate} onChange={(e) => updateField('taxRate', parseFloat(e.target.value) || 0)} className={inputClass} />
             <label className="flex items-center gap-2 mt-3 cursor-pointer">
-              <input type="checkbox" checked={data.isTaxInclusive || false} onChange={(e) => updateField('isTaxInclusive', e.target.checked)} className="w-4 h-4 accent-black dark:accent-white" />
+              <input type="checkbox" checked={data.isTaxInclusive || false} onChange={(e) => updateField('isTaxInclusive', e.target.checked)} className="w-4 h-4 accent-black dark:accent-white shrink-0" />
               <span className="text-xs font-medium text-gray-600 dark:text-zinc-400">{t('taxInclusive')}</span>
             </label>
           </div>
@@ -288,7 +287,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                  <button 
                    type="button" 
                    onClick={() => updateField('signature', '')}
-                   className="text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors"
+                   className="text-gray-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-500 transition-colors min-h-11 min-w-11 inline-flex items-center justify-center"
                    title="Remove Signature"
                  >
                    <X size={18} />
@@ -306,8 +305,7 @@ export function InvoiceForm({ data, onChange }: InvoiceFormProps) {
                 <button 
                   type="button" 
                   onClick={() => signatureInputRef.current?.click()}
-                  className="w-full flex justify-center items-center gap-2 border border-dashed border-gray-300 dark:border-zinc-700 px-4 py-2 text-sm text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-zinc-500 transition-colors bg-white dark:bg-zinc-900 font-medium"
-                  style={{ height: '38px' }}
+                  className="w-full min-h-11 flex justify-center items-center gap-2 border border-dashed border-gray-300 dark:border-zinc-700 px-4 py-2 text-base sm:text-sm text-gray-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-zinc-500 transition-colors bg-white dark:bg-zinc-900 font-medium"
                 >
                   <Upload size={16} /> {t('uploadSignature')}
                 </button>

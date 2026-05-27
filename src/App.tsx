@@ -304,11 +304,9 @@ export default function App() {
         <div className="max-w-6xl mx-auto px-4 space-y-4">
           <p className="text-[11px] uppercase tracking-widest text-gray-500 dark:text-zinc-400">InvoicePad • Free invoice maker for freelancers and small businesses</p>
           <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-[11px]">
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="/about.html">About</a>
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="/contact.html">Contact</a>
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="/privacy-policy.html">Privacy Policy</a>
-            <a className="hover:text-black dark:hover:text-white transition-colors" href="/terms-of-service.html">Terms of Service</a>
-            <a className="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1" href="https://joshuaadesina.vercel.com" target="_blank" rel="noreferrer">
+            <a className="hover:text-black dark:hover:text-white transition-colors" href="/guide/compliance">Invoice Compliance Guide</a>
+            <a className="hover:text-black dark:hover:text-white transition-colors" href="/guide/getting-paid">Guide to Getting Paid</a>
+            <a className="hover:text-black dark:hover:text-white transition-colors" href="https://joshuaadesina.vercel.com" target="_blank" rel="noreferrer">
               Portfolio <ExternalLink size={12} />
             </a>
           </nav>

@@ -74,7 +74,16 @@ export default function App() {
 
   useEffect(() => {
     const savedCode = localStorage.getItem('invoicepad_referral_code');
-    const code = savedCode || `invp-${Math.random().toString(36).slice(2, 8)}`;
+    const randomSuffix = (() => {
+      if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID().slice(0, 8);
+      if (globalThis.crypto?.getRandomValues) {
+        const bytes = new Uint8Array(4);
+        globalThis.crypto.getRandomValues(bytes);
+        return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+      }
+      return `${Date.now().toString(36)}-${Math.floor(Math.random() * 1e6).toString(36)}`.slice(0, 8);
+    })();
+    const code = savedCode || `invp-${randomSuffix}`;
     if (!savedCode) {
       localStorage.setItem('invoicepad_referral_code', code);
     }
@@ -225,9 +234,11 @@ export default function App() {
               <p className="text-gray-600 dark:text-zinc-300 leading-relaxed text-sm sm:text-base">
                 Built by independent developer Joshua Adesina, InvoicePad focuses on fast invoice creation, clear totals, and print-ready PDF exports without signup friction.
               </p>
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400">
-                Built by independent developer • Free and fast invoice generator • Freelancer invoice tool Nigeria
-              </p>
+              <ul className="text-xs sm:text-sm text-gray-500 dark:text-zinc-400 list-disc pl-5 space-y-1">
+                <li>Built by independent developer</li>
+                <li>Free and fast invoice generator</li>
+                <li>Freelancer invoice tool Nigeria</li>
+              </ul>
             </div>
             <aside className="border border-gray-200 dark:border-zinc-800 p-4 sm:p-5 rounded-sm bg-gray-50 dark:bg-zinc-950/50 space-y-4">
               <h2 className="text-sm font-bold uppercase tracking-wider flex items-center gap-2"><Share2 size={14} /> Share InvoicePad</h2>

@@ -245,7 +245,7 @@ export default function App() {
                   <input readOnly value={shareUrl} className="w-full border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-2 text-xs text-gray-600 dark:text-zinc-300" />
                   <button onClick={handleCopyLink} className="px-3 py-2 border border-black dark:border-white text-xs font-bold uppercase tracking-wider flex items-center gap-1">
                     {copied ? <Check size={14} /> : <Copy size={14} />}
-                    {copied ? 'Copied' : 'Copy invoice link'}
+                    {copied ? 'Copied' : 'Copy share link'}
                   </button>
                 </div>
               </div>

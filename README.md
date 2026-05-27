@@ -49,6 +49,20 @@
 
 ---
 
+## 🚢 Deployment
+
+1. Install dependencies:  
+   `npm install`
+2. Build production assets:  
+   `npm run build`
+3. Start production server:  
+   `npm run start`
+
+The app serves built files from `dist/` and listens on `PORT` (defaults to `8080`).  
+Health check endpoint: `/health`
+
+---
+
 ## 📸 Screenshots
 <img src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png">  
 _Live demo available: <a href="https://ai.studio/apps/609c2bf7-8e8a-49eb-9224-0cf16fc2ca56">AI Studio App</a>_

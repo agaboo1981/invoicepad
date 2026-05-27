@@ -13,6 +13,29 @@ app.get('/health', (_req, res) => {
   res.status(200).json({status: 'ok'});
 });
 
+const redirects = {
+  '/about.html': '/',
+  '/consultant-invoice-template.html': '/',
+  '/contact.html': '/',
+  '/contractor-invoice-generator.html': '/',
+  '/freelancer-invoice-generator.html': '/',
+  '/hourly-invoice-template.html': '/',
+  '/invoice-generator-canada.html': '/',
+  '/invoice-generator-india.html': '/',
+  '/invoice-generator-uk.html': '/',
+  '/invoice-generator-usa.html': '/',
+  '/invoice-template-guide.html': '/',
+  '/privacy-policy.html': '/',
+  '/self-employed-invoice-template.html': '/',
+  '/terms-of-service.html': '/'
+};
+
+Object.keys(redirects).forEach(path => {
+  app.get(path, (req, res) => {
+    res.redirect(301, redirects[path]);
+  });
+});
+
 app.use(express.static(distPath, {extensions: ['html']}));
 
 app.use((_req, res) => {

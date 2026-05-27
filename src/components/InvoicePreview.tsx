@@ -65,7 +65,7 @@ export function InvoicePreview({ data }: InvoicePreviewProps) {
         {/* Items Table */}
         <div className="mb-auto">
           <div className="w-full overflow-x-auto">
-            <table className="w-full min-w-[32rem] text-left border-collapse">
+            <table className="w-full min-w-max text-left border-collapse">
               <thead>
                 <tr className="border-b-2 border-black">
                   <th className="py-3 px-1 text-[10px] uppercase font-bold tracking-wider text-gray-400 w-full">{t('itemDesc')}</th>

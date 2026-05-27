@@ -125,7 +125,7 @@ export default function App() {
           </button>
         </div>
 
-        <div className={`sm:hidden overflow-hidden border-t border-gray-200 dark:border-zinc-800 transition-all duration-300 ease-out ${mobileMenuOpen ? 'max-h-[70vh] opacity-100' : 'max-h-0 opacity-0 border-t-0'}`}>
+        <div className={`sm:hidden overflow-hidden border-t border-gray-200 dark:border-zinc-800 transition-all duration-300 ease-out ${mobileMenuOpen ? 'max-h-[75dvh] opacity-100 overflow-y-auto' : 'max-h-0 opacity-0 border-t-0'}`}>
           <div className="px-4 py-4 space-y-4 bg-white dark:bg-zinc-900">
             <div className="flex flex-col gap-3">
               <button
@@ -165,9 +165,9 @@ export default function App() {
             </div>
 
             <nav className="pt-1 border-t border-gray-100 dark:border-zinc-800 flex flex-wrap gap-x-4 gap-y-2 text-xs">
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/freelancer-invoice-generator.html">Freelancer</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/consultant-invoice-template.html">Consultant</a>
-              <a className="text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-template-guide.html">Guide</a>
+              <a className="inline-flex items-center min-h-11 py-2 text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/freelancer-invoice-generator.html">Freelancer</a>
+              <a className="inline-flex items-center min-h-11 py-2 text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/consultant-invoice-template.html">Consultant</a>
+              <a className="inline-flex items-center min-h-11 py-2 text-gray-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-colors" href="/invoice-template-guide.html">Guide</a>
             </nav>
           </div>
         </div>
@@ -273,10 +273,10 @@ export default function App() {
         <div className="px-4 sm:px-6 space-y-4">
           <p>&copy; {new Date().getFullYear()} InvoicePad. All rights reserved.</p>
           <nav className="flex flex-wrap justify-center gap-4 text-[11px]">
-            <a className="hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/about.html">About</a>
-            <a className="hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/contact.html">Contact</a>
-            <a className="hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/privacy-policy.html">Privacy</a>
-            <a className="hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/terms-of-service.html">Terms</a>
+            <a className="inline-flex items-center min-h-11 py-2 hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/about.html">About</a>
+            <a className="inline-flex items-center min-h-11 py-2 hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/contact.html">Contact</a>
+            <a className="inline-flex items-center min-h-11 py-2 hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/privacy-policy.html">Privacy</a>
+            <a className="inline-flex items-center min-h-11 py-2 hover:text-gray-600 dark:hover:text-zinc-300 transition-colors" href="/terms-of-service.html">Terms</a>
           </nav>
         </div>
       </footer>
@@ -317,7 +317,7 @@ export default function App() {
       )}
 
       <div className="fixed bottom-0 left-0 right-0 z-30 sm:hidden no-print">
-        <div className="px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 bg-white/95 dark:bg-zinc-900/95 border-t border-gray-200 dark:border-zinc-800 backdrop-blur supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:dark:bg-zinc-900/80">
+        <div className="px-4 pb-[calc(env(safe-area-inset-bottom)+var(--mobile-safe-gap))] pt-3 bg-white/95 dark:bg-zinc-900/95 border-t border-gray-200 dark:border-zinc-800 backdrop-blur supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:dark:bg-zinc-900/80">
           <button
             onClick={handlePrint}
             className="w-full min-h-11 bg-black dark:bg-white text-white dark:text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-gray-800 dark:hover:bg-zinc-200 transition-colors"

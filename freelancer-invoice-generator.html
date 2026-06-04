@@ -11,24 +11,23 @@
     <meta property="og:title" content="Invoice Generator for Freelancers | InvoicePad" />
     <meta property="og:description" content="Fast, privacy-friendly freelance invoice maker with instant PDF export." />
     <meta property="og:url" content="https://invoicepad.shop/freelancer-invoice-generator.html" />
-    <style>
-      body { font-family: Inter, Arial, sans-serif; margin: 0; color: #0f172a; background: #f8fafc; line-height: 1.6; }
-      main { max-width: 880px; margin: 0 auto; padding: 2rem 1rem 3rem; }
-      h1, h2 { line-height: 1.25; }
-      .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin: 1rem 0; }
-      .btn { display: inline-block; background: #111827; color: #fff; padding: 0.75rem 1rem; text-decoration: none; border-radius: 8px; font-weight: 600; }
-      nav a { margin-right: 0.75rem; }
-      ul { padding-left: 1.2rem; }
-    </style>
+    <link rel="stylesheet" href="/static-page.css" />
   </head>
   <body>
-    <main>
-      <nav aria-label="Internal resources">
+    <header class="site-header">
+      <div class="site-header-row">
+        <a class="brand" href="/">InvoicePad</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="page-nav">☰ Menu</button>
+      </div>
+      <nav id="page-nav" class="site-nav" aria-label="Internal resources">
         <a href="/">Main Invoice Tool</a>
         <a href="/consultant-invoice-template.html">Consultant Template</a>
         <a href="/invoice-generator-india.html">India Invoices</a>
         <a href="/invoice-template-guide.html">Invoice Guide</a>
       </nav>
+    </header>
+
+    <main>
       <h1>Invoice Generator for Freelancers</h1>
       <p>Create clear, client-ready invoices for freelance projects, retainers, and one-off services in under five minutes.</p>
       <a class="btn" href="/">Open Free Invoice Generator</a>
@@ -53,5 +52,30 @@
         </ul>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <p>&copy; InvoicePad</p>
+        <nav aria-label="Footer links">
+          <a href="/">Main Tool</a>
+          <a href="/freelancer-invoice-generator.html">Freelancer</a>
+          <a href="/consultant-invoice-template.html">Consultant</a>
+          <a href="/invoice-template-guide.html">Guide</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const button = document.querySelector('.menu-toggle');
+        const nav = document.getElementById('page-nav');
+        if (!button || !nav) return;
+        button.addEventListener('click', () => {
+          const open = nav.classList.toggle('is-open');
+          button.setAttribute('aria-expanded', String(open));
+          button.textContent = open ? '✕ Close' : '☰ Menu';
+        });
+      })();
+    </script>
   </body>
 </html>

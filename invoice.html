@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!--include:partials/head.html-->
+    <title>Free invoice generator | Invoice Pad</title>
+    <meta name="description" content="Create a freelance invoice in your browser and download a PDF. No account. Your data stays on this device." />
+    <link rel="canonical" href="{{SITE_URL}}/invoice.html" />
+    <meta property="og:url" content="{{SITE_URL}}/invoice.html" />
+    <meta property="og:title" content="Free invoice generator | Invoice Pad" />
+    <meta property="og:description" content="Create a freelance invoice in your browser and download a PDF. No account. Your data stays on this device." />
+    <meta name="twitter:title" content="Free invoice generator | Invoice Pad" />
+    <meta name="twitter:description" content="Create a freelance invoice in your browser and download a PDF. No account. Your data stays on this device." />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Invoice Pad invoice generator",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "{{SITE_URL}}/invoice.html",
+      "isAccessibleForFree": true
+    }
+    </script>
+  </head>
+  <body>
+    <!--include:partials/header.html-->
+    <main id="main">
+      <header class="page-intro">
+        <h1>Free invoice generator</h1>
+        <p>Fill in the form. The paper on the right is what your client sees. Use Print or Save as PDF when you are ready. Nothing is sent to our servers.</p>
+      </header>
+      <div class="workspace" data-invoice-app>
+        <form class="workspace__form panel" id="invoice-form" autocomplete="on">
+          <h2>Your details</h2>
+          <div class="field">
+            <label for="fromName">Name or business</label>
+            <input id="fromName" name="fromName" type="text" />
+          </div>
+          <div class="field">
+            <label for="fromEmail">Email</label>
+            <input id="fromEmail" name="fromEmail" type="email" />
+          </div>
+          <div class="field">
+            <label for="fromAddress">Address</label>
+            <textarea id="fromAddress" name="fromAddress" rows="3"></textarea>
+          </div>
+          <div class="field">
+            <label for="logo">Logo (optional)</label>
+            <input id="logo" name="logo" type="file" accept="image/*" />
+          </div>
+
+          <h2>Client</h2>
+          <div class="field">
+            <label for="toName">Client name</label>
+            <input id="toName" name="toName" type="text" />
+          </div>
+          <div class="field">
+            <label for="toEmail">Client email</label>
+            <input id="toEmail" name="toEmail" type="email" />
+          </div>
+          <div class="field">
+            <label for="toAddress">Client address</label>
+            <textarea id="toAddress" name="toAddress" rows="3"></textarea>
+          </div>
+
+          <h2>Invoice</h2>
+          <div class="field-row">
+            <div class="field">
+              <label for="invoiceNumber">Number</label>
+              <input id="invoiceNumber" name="invoiceNumber" type="text" />
+            </div>
+            <div class="field">
+              <label for="currency">Currency</label>
+              <select id="currency" name="currency"></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="issueDate">Issue date</label>
+              <input id="issueDate" name="issueDate" type="date" />
+            </div>
+            <div class="field">
+              <label for="dueDate">Due date</label>
+              <input id="dueDate" name="dueDate" type="date" />
+            </div>
+          </div>
+
+          <h2>Line items</h2>
+          <div class="line-list" data-line-list></div>
+          <button class="button button--secondary" type="button" data-add-line>Add a line</button>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="discountPercent">Discount %</label>
+              <input id="discountPercent" name="discountPercent" type="number" min="0" max="100" step="0.01" />
+            </div>
+            <div class="field">
+              <label for="taxRatePercent">Tax %</label>
+              <input id="taxRatePercent" name="taxRatePercent" type="number" min="0" max="100" step="0.01" />
+            </div>
+          </div>
+          <label class="check">
+            <input id="taxInclusive" name="taxInclusive" type="checkbox" />
+            Prices already include tax
+          </label>
+
+          <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Payment terms, thank you, or bank details"></textarea>
+          </div>
+          <div class="field">
+            <label for="paymentDetails">Payment details</label>
+            <textarea id="paymentDetails" name="paymentDetails" rows="3"></textarea>
+          </div>
+        </form>
+
+        <div>
+          <div class="paper" id="invoice-paper" aria-live="polite">
+            <div class="paper__stub" aria-hidden="true"></div>
+            <div class="paper__body" data-invoice-preview></div>
+          </div>
+        </div>
+      </div>
+      <div class="sticky-bar no-print">
+        <span>Total <strong data-invoice-total>$0.00</strong></span>
+        <div class="form-actions">
+          <button class="button button--ghost" type="button" data-reset-invoice>Reset draft</button>
+          <button class="button" type="button" data-print-invoice>Print or save PDF</button>
+        </div>
+      </div>
+      <noscript class="prose"><p>JavaScript is required to edit and preview an invoice in the browser.</p></noscript>
+      <script type="module" src="/src/pages/invoice.ts"></script>
+    </main>
+    <!--include:partials/footer.html-->
+  </body>
+</html>

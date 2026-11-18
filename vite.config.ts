@@ -1,29 +1,50 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig} from 'vite';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { defineConfig, loadEnv, type Plugin } from 'vite';
 
-export default defineConfig(() => {
+const root = dirname(fileURLToPath(import.meta.url));
+
+function siteUrlPlugin(siteUrl: string): Plugin {
+  const origin = siteUrl.replace(/\/$/, '');
   return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
+    name: 'site-url-and-includes',
+    transformIndexHtml: {
+      order: 'pre',
+      handler(html) {
+        const withIncludes = html.replace(/<!--include:([\w./-]+)-->/g, (_match, file) =>
+          readFileSync(resolve(root, file), 'utf8'),
+        );
+        return withIncludes.replaceAll('{{SITE_URL}}', origin);
       },
     },
+    closeBundle() {
+      const dist = resolve(root, 'dist');
+      for (const file of ['sitemap.xml', 'robots.txt']) {
+        const path = resolve(dist, file);
+        if (existsSync(path)) {
+          writeFileSync(path, readFileSync(path, 'utf8').replaceAll('{{SITE_URL}}', origin));
+        }
+      }
+    },
+  };
+}
+
+const pages = Object.fromEntries(
+  readdirSync(root)
+    .filter((file) => file.endsWith('.html'))
+    .map((file) => [file.replace(/\.html$/, ''), resolve(root, file)]),
+);
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, root, '');
+  const siteUrl = env.VITE_SITE_URL || 'https://invoicepad.shop';
+  return {
+    plugins: [siteUrlPlugin(siteUrl)],
     build: {
       rollupOptions: {
-        input: {
-          main: path.resolve(__dirname, 'index.html'),
-        },
+        input: pages,
       },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };
 });

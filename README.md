@@ -1,72 +1,44 @@
-# InvoicePad
+# Invoice Pad
 
-InvoicePad is a free invoice generator and free invoice maker for freelancers and small businesses. It runs as a Vite React app with static SEO landing pages and AdSense-compliance pages.
+A free, client-side invoice generator and tax set-aside helper for freelancers, plus a paid 2027 tax and income organizer (Google Sheets, $19).
 
-## Live Site
-- Primary: https://invoicepad.shop
-- Portfolio: https://joshuaadesina.vercel.com
-- Contact: giganticjoshua@gmail.com
+No account is required. Invoice and tax drafts stay in the browser. The tax helper produces estimates, not tax advice.
 
-## Project Structure
-- App entry: `/tmp/workspace/agaboo1981/invoicepad/index.html`
-- React app: `/tmp/workspace/agaboo1981/invoicepad/src`
-- Static pages: `/tmp/workspace/agaboo1981/invoicepad/*.html`
-- Public assets: `/tmp/workspace/agaboo1981/invoicepad/public`
+## Product pages
 
-## Key Pages
-### Product + SEO pages
-- `/`
-- `/freelancer-invoice-generator.html`
-- `/consultant-invoice-template.html`
-- `/invoice-generator-india.html`
-- `/invoice-template-guide.html`
-- `/invoice-generator-usa.html`
-- `/invoice-generator-uk.html`
-- `/invoice-generator-canada.html`
-- `/self-employed-invoice-template.html`
-- `/hourly-invoice-template.html`
-- `/contractor-invoice-generator.html`
+- `/` — home
+- `/invoice.html` — free invoice generator (PDF/print)
+- `/tax.html` — tax set-aside helper
+- `/organizer.html` — 2027 Freelancer Tax & Income Organizer
+- SEO landings for free invoice generator, freelance invoice template, 1099 tax organizer, and the 2027 self-employed spreadsheet
+- `/about.html`, `/contact.html`, `/privacy.html`, `/terms.html`
 
-### Compliance + trust pages
-- `/about.html`
-- `/contact.html`
-- `/privacy-policy.html`
-- `/terms-of-service.html`
+## Stack
 
-## SEO + Compliance Notes
-- Canonical, Open Graph, and Twitter metadata are present on all pages.
-- Shared OG image: `/og-image.svg`.
-- Sitemap includes all product and legal pages: `/sitemap.xml`.
-- Robots file references sitemap: `/robots.txt`.
-- Footer on app and static pages links to About, Contact, Privacy Policy, Terms of Service, and portfolio.
+Vite + vanilla TypeScript, static multi-page build. See `docs/SYSTEM_DESIGN.md` and `docs/ARCHITECTURE.md`.
 
 ## Development
+
 ```bash
-cd /tmp/workspace/agaboo1981/invoicepad
 npm install
+npm test
 npm run dev
 ```
 
-## Validation
 ```bash
-cd /tmp/workspace/agaboo1981/invoicepad
-npm run lint
 npm run build
+npm start
 ```
 
-## Production Deployment
-```bash
-cd /tmp/workspace/agaboo1981/invoicepad
-npm install
-npm run build
-npm run start
-```
-The server serves `dist/` on `PORT` (default `8080`). Health check endpoint: `/health`.
+`npm start` serves `dist/` on `PORT` (default 8080) and exposes `/health` for Node hosts.
 
-## Post-Deploy Verification
-1. Open key routes and confirm no 404s.
-2. Confirm legal pages are one click away from the homepage footer.
-3. Validate metadata with social preview tools (Open Graph + Twitter).
-4. Submit `https://invoicepad.shop/sitemap.xml` in Google Search Console.
-5. Run URL inspection for newly added legal pages.
-6. Run Lighthouse on homepage and important landing pages and track scores over time.
+## Configuration
+
+Copy `.env.example` to `.env` if you need to change values:
+
+- `VITE_SITE_URL` — canonical origin (default `https://invoicepad.shop`)
+- `VITE_PAYMENT_URL` — off-site checkout link for the organizer; leave empty to keep the Buy button as a placeholder
+
+## Contact
+
+giganticjoshua@gmail.com

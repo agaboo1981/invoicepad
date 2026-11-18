@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!--include:partials/head.html-->
+    <title>Freelancer tax set-aside helper | Invoice Pad</title>
+    <meta name="description" content="Estimate how much income to set aside for tax. Choose a US, UK, or custom rate. This is an estimate, not tax advice." />
+    <link rel="canonical" href="{{SITE_URL}}/tax.html" />
+    <meta property="og:url" content="{{SITE_URL}}/tax.html" />
+    <meta property="og:title" content="Freelancer tax set-aside helper | Invoice Pad" />
+    <meta property="og:description" content="Estimate how much income to set aside for tax. Choose a US, UK, or custom rate. This is an estimate, not tax advice." />
+    <meta name="twitter:title" content="Freelancer tax set-aside helper | Invoice Pad" />
+    <meta name="twitter:description" content="Estimate how much income to set aside for tax. Choose a US, UK, or custom rate. This is an estimate, not tax advice." />
+  </head>
+  <body>
+    <!--include:partials/header.html-->
+    <main id="main">
+      <header class="page-intro">
+        <h1>Tax set-aside helper</h1>
+        <p>Use this to reserve a portion of your profit as you earn. It does not file a return, calculate a legal liability, or replace an accountant.</p>
+      </header>
+      <p class="disclaimer wrap" role="note"><strong>Estimates, not tax advice.</strong> Presets are starting points only. You choose the rate. Laws and allowances change, and your situation may be different.</p>
+      <div class="workspace" data-tax-app>
+        <form class="workspace__form panel" id="tax-form">
+          <h2>Income this period</h2>
+          <div class="field">
+            <label for="income">Gross income</label>
+            <input id="income" name="income" type="text" inputmode="decimal" value="0" />
+          </div>
+          <div class="field">
+            <label for="expenses">Business expenses</label>
+            <input id="expenses" name="expenses" type="text" inputmode="decimal" value="0" />
+          </div>
+          <div class="field">
+            <label for="currencyTax">Currency</label>
+            <select id="currencyTax" name="currency"></select>
+          </div>
+          <div class="field">
+            <label for="preset">Starting point</label>
+            <select id="preset" name="preset">
+              <option value="us">United States freelancer (30%, quarterly)</option>
+              <option value="uk">United Kingdom sole trader (25%, two instalments)</option>
+              <option value="custom">Custom rate</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ratePercent">Set-aside rate %</label>
+            <input id="ratePercent" name="ratePercent" type="number" min="0" max="100" step="0.01" value="30" />
+          </div>
+          <div class="field">
+            <label for="periods">Number of periods</label>
+            <input id="periods" name="periods" type="number" min="1" max="12" step="1" value="4" />
+          </div>
+          <p class="muted" data-preset-summary></p>
+        </form>
+        <div>
+          <dl class="results" aria-live="polite">
+            <div>
+              <dt>Profit</dt>
+              <dd data-result="profit">$0.00</dd>
+            </div>
+            <div class="is-emphasis">
+              <dt>Set aside</dt>
+              <dd data-result="setAside">$0.00</dd>
+            </div>
+            <div>
+              <dt>Left to spend or save</dt>
+              <dd data-result="leftover">$0.00</dd>
+            </div>
+            <div>
+              <dt data-period-label>Per quarter</dt>
+              <dd data-result="period">$0.00</dd>
+            </div>
+          </dl>
+          <p class="muted" data-loss-note hidden>Expenses are higher than income, so there is no profit to reserve in this estimate.</p>
+          <p><a href="/organizer.html">Keep a full-year record with the 2027 organizer</a></p>
+        </div>
+      </div>
+      <noscript class="prose"><p>JavaScript is required to calculate a set-aside estimate.</p></noscript>
+      <script type="module" src="/src/pages/tax.ts"></script>
+    </main>
+    <!--include:partials/footer.html-->
+  </body>
+</html>

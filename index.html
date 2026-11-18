@@ -1,101 +1,85 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Invoice Generator & Free Invoice Maker | InvoicePad</title>
-    <meta name="description" content="InvoicePad is a free invoice generator and free invoice maker for freelancers and small businesses. Create professional invoices and download PDF instantly." />
-    <meta name="keywords" content="invoice generator, free invoice maker, freelancer invoice tool Nigeria, invoice template, online invoice generator, PDF invoice maker" />
-    <meta name="author" content="InvoicePad" />
-    <meta name="application-name" content="InvoicePad" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="format-detection" content="telephone=no" />
-    <link rel="canonical" href="https://invoicepad.shop/" />
-    <link rel="alternate" hreflang="en" href="https://invoicepad.shop/" />
-    <link rel="alternate" hreflang="x-default" href="https://invoicepad.shop/" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://invoicepad.shop/" />
-    <meta property="og:site_name" content="InvoicePad" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Free Invoice Generator & Free Invoice Maker | InvoicePad" />
-    <meta property="og:description" content="Create professional invoices in minutes with InvoicePad. Built for freelancers and small businesses." />
-    <meta property="og:image" content="/og-image.svg" />
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://invoicepad.shop/" />
-    <meta name="twitter:title" content="Free Invoice Generator & Free Invoice Maker | InvoicePad" />
-    <meta name="twitter:description" content="Free invoice maker for freelancers and small businesses with instant PDF export." />
-    <meta name="twitter:image" content="/og-image.svg" />
-
-    <!-- Structured Data (JSON-LD) for SEO -->
+    <!--include:partials/head.html-->
+    <title>Invoice Pad — free invoice generator and freelancer tax tools</title>
+    <meta name="description" content="Create a professional invoice in your browser, estimate tax to set aside, and get a 2027 freelancer tax and income organizer. No account required." />
+    <link rel="canonical" href="{{SITE_URL}}/" />
+    <meta property="og:url" content="{{SITE_URL}}/" />
+    <meta property="og:title" content="Invoice Pad — free invoice generator and freelancer tax tools" />
+    <meta property="og:description" content="Create a professional invoice in your browser, estimate tax to set aside, and get a 2027 freelancer tax and income organizer. No account required." />
+    <meta name="twitter:title" content="Invoice Pad — free invoice generator and freelancer tax tools" />
+    <meta name="twitter:description" content="Create a professional invoice in your browser, estimate tax to set aside, and get a 2027 freelancer tax and income organizer. No account required." />
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://invoicepad.shop/#organization",
-          "name": "InvoicePad",
-          "url": "https://invoicepad.shop/"
-        },
-        {
           "@type": "WebSite",
-          "@id": "https://invoicepad.shop/#website",
-          "url": "https://invoicepad.shop/",
-          "name": "InvoicePad",
-          "description": "Free online invoice generator for freelancers, contractors and small businesses.",
-          "inLanguage": "en",
-          "publisher": {
-            "@id": "https://invoicepad.shop/#organization"
-          }
+          "name": "Invoice Pad",
+          "url": "{{SITE_URL}}/",
+          "description": "Free invoice generator and freelancer tax tools."
         },
         {
-          "@type": "SoftwareApplication",
-          "@id": "https://invoicepad.shop/#app",
-          "name": "InvoicePad",
-          "url": "https://invoicepad.shop/",
-          "applicationCategory": "BusinessApplication",
-          "applicationSubCategory": "Invoice Generator",
-          "operatingSystem": "Any",
-          "browserRequirements": "Requires JavaScript and a modern web browser.",
-          "description": "Create professional invoices online for free, customize tax and discount fields, add logos and payment QR codes, and export invoices as print-ready PDFs.",
-          "isAccessibleForFree": true,
-          "inLanguage": "en",
-          "publisher": {
-            "@id": "https://invoicepad.shop/#organization"
-          },
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "featureList": [
-            "Free online invoice generator",
-            "Instant PDF invoice download",
-            "Client-side invoice editing",
-            "Tax and discount calculations",
-            "Logo upload support",
-            "Payment QR code support",
-            "Multi-currency invoicing"
-          ]
+          "@type": "Organization",
+          "name": "Invoice Pad",
+          "url": "{{SITE_URL}}/"
         }
       ]
     }
     </script>
-
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8597685788577214" crossorigin="anonymous"></script>
   </head>
   <body>
-    <noscript>
-      <h1>Free Invoice Generator Online</h1>
-      <p>InvoicePad helps freelancers, contractors and small businesses create professional invoices online and export them as print-ready PDF files. Enable JavaScript to use the invoice editor.</p>
-    </noscript>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!--include:partials/header.html-->
+    <main id="main">
+      <section class="hero">
+        <div>
+          <h1>The invoice pad for freelancers.</h1>
+          <p class="lede">Write a professional invoice, print or save it as a PDF, and keep a simple tax set-aside number next to it. Everything runs in your browser. No account, no upload.</p>
+          <div class="actions">
+            <a class="button" href="/invoice.html">Create an invoice</a>
+            <a class="button button--secondary" href="/tax.html">Estimate tax to set aside</a>
+          </div>
+        </div>
+        <aside class="sample-pad" aria-hidden="true">
+          <div class="sample-pad__stub"></div>
+          <div class="sample-pad__body">
+            <p class="sample-pad__label">Invoice</p>
+            <dl>
+              <dt>Number</dt><dd>INV-0042</dd>
+              <dt>From</dt><dd>River Studio</dd>
+              <dt>To</dt><dd>North &amp; Pine</dd>
+            </dl>
+            <table>
+              <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+              <tbody>
+                <tr><td>Brand workshop</td><td>1,200.00</td></tr>
+                <tr><td>Website build</td><td>3,400.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </aside>
+      </section>
+      <section class="section">
+        <div class="split-3">
+          <article>
+            <h2>Free invoice generator</h2>
+            <p>Add your details, line items, tax, and a logo. The live paper preview is what you print or save as a PDF. The draft stays on this device.</p>
+            <a href="/invoice.html">Open the invoice generator</a>
+          </article>
+          <article>
+            <h2>Tax set-aside helper</h2>
+            <p>Enter income, expenses, and a rate. See how much to reserve and how to split it across the year. Estimates only, not tax advice.</p>
+            <a href="/tax.html">Open the tax helper</a>
+          </article>
+          <article>
+            <h2>2027 tax organizer</h2>
+            <p>A Google Sheets template for income, expenses, receipts, and quarterly estimates. One purchase, $19, yours to reuse.</p>
+            <a href="/organizer.html">See the organizer</a>
+          </article>
+        </div>
+      </section>
+    </main>
+    <!--include:partials/footer.html-->
   </body>
 </html>

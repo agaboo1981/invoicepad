@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 BASE = "http://127.0.0.1:5173"
 SHOTS = Path("/workspace/bond/invoicepad-shots")
 WIDTHS = (375, 768, 1280)
-PAGES = ("/", "/invoice.html", "/tax.html", "/organizer.html")
+PAGES = ("/", "/invoice.html", "/tax.html", "/organizer.html", "/blog/", "/blog/free-invoice-template.html")
 
 
 def path_name(route: str) -> str:

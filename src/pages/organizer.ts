@@ -5,10 +5,14 @@ const note = document.querySelector<HTMLElement>('[data-buy-note]');
 
 if (button && !PAYMENT_IS_PLACEHOLDER) {
   button.href = PAYMENT_URL;
+  button.textContent = 'Buy the organizer';
+  button.target = '_blank';
+  button.rel = 'noopener noreferrer';
   button.removeAttribute('aria-disabled');
   note?.setAttribute('hidden', '');
 } else if (button) {
-  button.href = '#payment-link-pending';
+  button.href = '#coming-soon';
+  button.textContent = 'Coming soon';
   button.setAttribute('aria-disabled', 'true');
   button.addEventListener('click', (event) => {
     event.preventDefault();

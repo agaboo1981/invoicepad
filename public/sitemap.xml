@@ -4,6 +4,12 @@
   <url><loc>{{SITE_URL}}/invoice.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>{{SITE_URL}}/tax.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>{{SITE_URL}}/organizer.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>{{SITE_URL}}/blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{SITE_URL}}/blog/free-invoice-template.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{SITE_URL}}/blog/what-to-include-on-an-invoice.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{SITE_URL}}/blog/how-much-should-i-set-aside-for-taxes-1099.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{SITE_URL}}/blog/quarterly-estimated-tax-dates-2027.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>{{SITE_URL}}/blog/end-of-year-tax-checklist-for-freelancers.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>{{SITE_URL}}/free-invoice-generator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>{{SITE_URL}}/freelance-invoice-template.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>{{SITE_URL}}/1099-tax-organizer.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

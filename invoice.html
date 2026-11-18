@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type="software">
   <head>
     <!--include:partials/head.html-->
     <title>Free invoice generator | Invoice Pad</title>
@@ -27,9 +27,16 @@
     <!--include:partials/header.html-->
     <main id="main">
       <header class="page-intro">
-        <h1>Free invoice generator</h1>
+        <h1>A free invoice generator for freelancers</h1>
         <p>Fill in the form. The paper on the right is what your client sees. Use Print or Save as PDF when you are ready. Nothing is sent to our servers.</p>
       </header>
+      <div class="invoice-toolbar no-print">
+        <span>Total <strong data-invoice-total>$0.00</strong></span>
+        <div class="form-actions">
+          <button class="button button--ghost" type="button" data-reset-invoice>Reset draft</button>
+          <button class="button" type="button" data-print-invoice>Print or save PDF</button>
+        </div>
+      </div>
       <div class="workspace" data-invoice-app>
         <form class="workspace__form panel" id="invoice-form" autocomplete="on">
           <h2>Your details</h2>
@@ -116,17 +123,10 @@
         </form>
 
         <div>
-          <div class="paper" id="invoice-paper" aria-live="polite">
+          <div class="paper" id="invoice-paper" data-enter aria-live="polite">
             <div class="paper__stub" aria-hidden="true"></div>
             <div class="paper__body" data-invoice-preview></div>
           </div>
-        </div>
-      </div>
-      <div class="sticky-bar no-print">
-        <span>Total <strong data-invoice-total>$0.00</strong></span>
-        <div class="form-actions">
-          <button class="button button--ghost" type="button" data-reset-invoice>Reset draft</button>
-          <button class="button" type="button" data-print-invoice>Print or save PDF</button>
         </div>
       </div>
       <noscript class="prose"><p>JavaScript is required to edit and preview an invoice in the browser.</p></noscript>

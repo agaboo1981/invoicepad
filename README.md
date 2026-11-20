@@ -26,12 +26,16 @@ npm test
 npm run dev
 ```
 
+`npm run test:smoke` runs Playwright checks against a production preview (Python Playwright required; the existing `scripts/ui_screenshots.py` starts `vite preview` on port 4173 if needed).
+
 ```bash
 npm run build
 npm start
 ```
 
 `npm start` serves `dist/` on `PORT` (default 8080) and exposes `/health` for Node hosts.
+
+Deployment, including how to set the Gumroad link and DNS for invoicepad.shop, is in [DEPLOY.md](DEPLOY.md).
 
 ## Configuration
 

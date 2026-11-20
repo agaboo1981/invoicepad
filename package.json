@@ -9,6 +9,7 @@
     "preview": "vite preview --port 5173 --host 0.0.0.0",
     "start": "node server.js",
     "test": "vitest run",
+    "test:smoke": "python3 scripts/ui_screenshots.py",
     "test:watch": "vitest",
     "lint": "tsc --noEmit",
     "screenshots": "python3 scripts/ui_screenshots.py"
